@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1507114317 source:e:\project\programme qui demande a l'utilisateur un nombre entre 0 et 20\main.c
+	<stdio.h>
+	<stdlib.h>
+
