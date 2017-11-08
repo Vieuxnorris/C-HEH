@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1510137934 source:e:\project\exercice 2.5 malaise\main.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+
