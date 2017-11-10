@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1510323865 source:d:\project\decimal binaire\main.c
+	<stdio.h>
+	<stdlib.h>
+
