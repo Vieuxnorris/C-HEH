@@ -25,5 +25,6 @@ int main()
             reponse = reponse + tab[i][j];
         }
         printf("nombre de paire : %d \nsomme de la colonne : %d \n", compteur, reponse);
+        reponse = 0;
     }
 }
