@@ -5,11 +5,12 @@
 int menu();
 void jeu(char mot_visible[100],char mot_invisible[100], char lettre_choix);
 void afficher(char mot_invisible[100]);
+void score(char mot_visible[100],char mot_invisible[100],char lettre_choix);
 
 int main()
 {
     char lettre,mot[100],mot_secret[100];
-    int i=0,choix,score=10;
+    int i=0,choix,k2000;
 
     printf("<--bienvenue dans le jeu du pendu-->\n\n");
 
@@ -36,21 +37,14 @@ int main()
         case 1:
             jeu(mot,mot_secret,lettre);
             afficher(mot_secret);
-            if(strchr(mot, lettre)== NULL)
-            {
-                score--;
-                printf("\n il te reste %d de chance", score);
-                if(score==0)
-                {
-                    return 0;
-                }
-            }
+            score(mot,mot_secret,lettre);
             break;
         case 2:
             return 0;
             break;
         }
-    }while(mot_secret!=mot);
+    }while(strcmp(mot,mot_secret)==1);
+    printf("felicitation");
 }
 
 int menu()
@@ -83,4 +77,20 @@ void jeu(char mot_visible[100],char mot_invisible[100], char lettre_choix)
 void afficher(char mot_invisible[100])
 {
         printf("%s", mot_invisible);
+}
+
+void score(char mot_visible[100],char mot_invisible[100], char lettre_choix)
+{
+    int point=10;
+
+    if(strchr(mot_visible,lettre_choix)== NULL)
+    {
+        point--;
+        printf("\n il te reste %d de chance", point);
+        if(point==0)
+        {
+            printf("dommage :-(");
+            return 0;
+        }
+    }
 }
