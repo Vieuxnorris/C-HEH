@@ -66,7 +66,7 @@ void affichage_grille(char tableaux[NB_COLONNES][NB_LIGNE])
         printf("___"); 
     printf("|\n");
 
-    for(j = NB_LIGNE-1 ; j >= 0; j--) 
+    for(j = 0 ; j < NB_LIGNE; j++) 
     {
         printf("|");
         for(i = 0; i < NB_COLONNES; i++)
