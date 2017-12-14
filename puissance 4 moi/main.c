@@ -54,30 +54,30 @@ void grille(char tableaux[NB_COLONNES][NB_LIGNE])
 
 void affichage_grille(char tableaux[NB_COLONNES][NB_LIGNE])
 {
-    int w, h;
+    int i, j;
 
     printf("|");
-    for(w = 0; w < NB_COLONNES; w++)
-        printf(" %d ", w+1);  // on affiche le numero de la colonne
+    for(i = 0; i < NB_COLONNES; i++)
+        printf(" %d ", i+1);  
     printf("|\n");
 
     printf("|");
-    for(w = 0; w < NB_COLONNES; w++)
-        printf("___", w+1); // une ligne 'souligné' pour dessiner le cadre
+    for(i = 0; i < NB_COLONNES; i++)
+        printf("___", i+1); 
     printf("|\n");
 
-    for(h = NB_LIGNE-1 ; h >= 0; h--) // on affiche la ligne du haut en haut et on descend pour avoir l'affichage dans le bon sens
+    for(j = NB_LIGNE-1 ; j >= 0; j--) 
     {
         printf("|");
-        for(w = 0; w< NB_COLONNES; w++)
+        for(i = 0; i < NB_COLONNES; i++)
         {
-            printf(" %c ", tableaux[w][h]);
+            printf(" %c ", tableaux[i][j]);
         }
         printf("|\n");
     }
     printf("|");
-    for(w = 0; w < NB_COLONNES; w++)
-        printf("___", w+1); // une ligne 'souligné' pour dessiner le cadre
+    for(i = 0; i < NB_COLONNES; i++)
+        printf("___", i+1);
     printf("|\n");
 }
 
