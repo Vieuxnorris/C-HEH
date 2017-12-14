@@ -58,15 +58,19 @@ void affichage_grille(char tableaux[NB_COLONNES][NB_LIGNE])
 
     printf("|");
     for(i = 0; i < NB_COLONNES; i++)
-        printf(" %d ", i+1);  
+    {
+        printf(" %d ", i+1);
+    }
     printf("|\n");
 
     printf("|");
     for(i = 0; i < NB_COLONNES; i++)
-        printf("___"); 
+    {
+        printf("___");
+    }
     printf("|\n");
 
-    for(j = 0 ; j < NB_LIGNE; j++) 
+    for(j = 0 ; j < NB_LIGNE; j++)
     {
         printf("|");
         for(i = 0; i < NB_COLONNES; i++)
@@ -77,7 +81,9 @@ void affichage_grille(char tableaux[NB_COLONNES][NB_LIGNE])
     }
     printf("|");
     for(i = 0; i < NB_COLONNES; i++)
-        printf("___", i+1);
+    {
+        printf("___");
+    }
     printf("|\n");
 }
 
