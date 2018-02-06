@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1517953590 source:d:\project\jeu de carte\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<windows.h>
+
