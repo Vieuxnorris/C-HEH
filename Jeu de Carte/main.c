@@ -275,7 +275,7 @@ void Game(int joueur[10][5],int color[10][5],int nombre_de_joueur, int nombre_de
                         Winner = 0;
                     }
                     temp++;
-                    if(temp >= nombre_de_joueur+1)
+                    if(temp > nombre_de_joueur)
                     {
                         temp = 1;
                         manche++;
@@ -358,11 +358,13 @@ void pioche(int joueur[10][5],int color[10][5], int nombre_de_joueur,int votre_c
     Affichage_de_main(joueur,color,joueur_de_droite);
     printf("qu'elle est la carte que vous voulez changer : ");
     scanf("%d", &votre_carte);
+    if(joueur_de_droite+1 > nombre_de_joueur)
+    {
+        joueur_de_droite = 0;
+    }
     Affichage_de_main(joueur,color,joueur_de_droite+1);
     printf("qu'elle carte du joueur %d voulez-vous echanger ?",joueur_de_droite+1);
     scanf("%d", &valeur_test);
-    if(joueur_de_droite != 3)
-    {
         for(i=1;i<=nombre_de_joueur;i++)
         {
             for(j=1;j<=1;j++)
@@ -378,11 +380,6 @@ void pioche(int joueur[10][5],int color[10][5], int nombre_de_joueur,int votre_c
                 color[joueur_de_droite+1][valeur_test] = swap;
             }
         }
-    }
-    else
-    {
-        joueur_de_droite = 1;
-    }
 }
 
 
