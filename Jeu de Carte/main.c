@@ -22,7 +22,7 @@ int main()
     printf("Bienvenue dans notre programme \n\n");
     do
     {
-        printf("combien de joueur avec vous (3 à 10) ? ");
+        printf("combien de joueur avec vous (3 Ã  10) ? ");
         scanf("%d", &nombre_joueur);
         if(nombre_joueur >= 3 && nombre_joueur <= 10)
         {
@@ -61,8 +61,11 @@ int main()
         {
         case 1:
             system("cls");
-            printf("tu es quel joueur ? ");
-            scanf("%d", &joueur_nombre);
+            do
+            {
+                printf("tu es quel joueur ? ");
+                scanf("%d", &joueur_nombre);
+            }while(joueur_nombre <= nombre_joueur-nombre_joueur || joueur_nombre > nombre_joueur);
             Affichage_de_main(joueur,joueur_nombre);
             Sleep(10000);
             system("cls");
@@ -79,14 +82,12 @@ int main()
         case 4:
             system("cls");
             regle();
-            system("pause");
-            system("cls");
             break;
         case 5:
             return 0;
             break;
         }
-    }while(choix_joueur != 4);
+    }while(choix_joueur != 5);
 }
 
 
@@ -131,15 +132,16 @@ void Affichage_de_main(int joueur[10][4][4],int joueur_nombre)
 
 void regle()
 {
-    printf("Ce jeu se joue avec un jeu de 54 cartes que l'on séparera en deux tas, au début de la première manche. \n");
-    printf("Le jeu se déroule en plusieurs manches. Avant de jouer, les joueurs décident du nombre de manches à jouer. On peut en jouer autant que l'on veut, cela n'a pas d'importance. Les joueurs doivent former un cercle. On peut, aussi, décider de jouer autant de manches qu'il y a de cartes dans le « tas de merde ».");
-    printf("Le but de chaque joueur étant d'avoir quatre cartes de valeurs identiques en main, le premier à jouer choisit une carte qu'il ne veut pas garder et la fait passer à son voisin de gauche ou de droite ou à celui qui à la dame de pique sans la montrer aux autres. À ce moment, le premier joueur a trois cartes et le deuxième en a cinq. À son tour, le deuxième joueur fait passer une carte à son voisin. Ainsi, on tourne en faisant passer les cartes.");
-    printf("Lorsque l'un des joueurs a quatre cartes de même valeur (un roi, une dame, etc.) ou sauf à trois joueurs, 4 cartes du même signe (cœur, pique, trèfle ou carreau), il doit attendre que tout le monde ait quatre cartes en main. Une fois que c'est le cas, il doit poser sa main sur le « tas de merde » et tous les joueurs doivent l'imiter au plus vite. Le dernier à avoir posé sa main sur le « tas de merde » doit piocher une carte dans ce dernier et la poser devant lui, face visible. Il gagne autant de kilos de merde que la valeur indiquée par la carte.");
+    printf("Ce jeu se joue avec un jeu de 54 cartes que l'on sÃ©parera en deux tas, au dÃ©but de la premiÃ¨re manche. \n");
+    printf("Le jeu se dÃ©roule en plusieurs manches. Avant de jouer, les joueurs dÃ©cident du nombre de manches Ã  jouer. On peut en jouer autant que l'on veut, cela n'a pas d'importance. Les joueurs doivent former un cercle. On peut, aussi, dÃ©cider de jouer autant de manches qu'il y a de cartes dans le Â« tas de merde Â».");
+    printf("Le but de chaque joueur Ã©tant d'avoir quatre cartes de valeurs identiques en main, le premier Ã  jouer choisit une carte qu'il ne veut pas garder et la fait passer Ã  son voisin de gauche ou de droite ou Ã  celui qui Ã  la dame de pique sans la montrer aux autres. Ã€ ce moment, le premier joueur a trois cartes et le deuxiÃ¨me en a cinq. Ã€ son tour, le deuxiÃ¨me joueur fait passer une carte Ã  son voisin. Ainsi, on tourne en faisant passer les cartes.");
+    printf("Lorsque l'un des joueurs a quatre cartes de mÃªme valeur (un roi, une dame, etc.) ou sauf Ã  trois joueurs, 4 cartes du mÃªme signe (cÅ“ur, pique, trÃ¨fle ou carreau), il doit attendre que tout le monde ait quatre cartes en main. Une fois que c'est le cas, il doit poser sa main sur le Â« tas de merde Â» et tous les joueurs doivent l'imiter au plus vite. Le dernier Ã  avoir posÃ© sa main sur le Â« tas de merde Â» doit piocher une carte dans ce dernier et la poser devant lui, face visible. Il gagne autant de kilos de merde que la valeur indiquÃ©e par la carte. \n\n");
 }
 
 void Game(int joueur[10][4][4],int nombre_de_joueur, int nombre_de_manche)
 {
     int i,j;
+    int Winner=0,GameFull=0,End=0;
     int choix;
     do
     {
@@ -148,29 +150,47 @@ void Game(int joueur[10][4][4],int nombre_de_joueur, int nombre_de_manche)
             do
             {
                 i = rand() %nombre_de_joueur+1;
-                printf("joueur %d à toi de commencer ! \n\n", i);
+                printf("joueur %d Ã  toi de commencer ! \n\n", i);
                 switch(choix)
                 {
                     if(nombre_de_manche == 1)
                     {
                         case 1:
-                            printf("joueur %d dit : Dame de cœur ! À vous l'honneur ! Dame de pique, à vous la suite !");
+                            printf("joueur %d dit : Dame de cÅ“ur ! Ã€ vous l'honneur ! Dame de pique, Ã  vous la suite !");
                             break;
                     }
                 case 2:
                     system("cls");
                     Affichage_de_main(joueur,nombre_de_joueur);
-                    printf("tu as 4 cartes de même valeurs (oui ou non)? ");
-
+                    printf("tu as 4 cartes de mÃªme valeurs (oui ou non)? ");
                     break;
                 case 3:
                     system("cls");
                     regle();
                     break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    i++;
+                    break;
+                case 7:
+                    Winner == 1;
+                    GameFull == 1;
+
+                    break;
                 }
-            }while(Winner);
-        }while(GameFull);
-    }while(End);
+            }while(Winner == 0);
+            printf("tu veux refaire une partie (1 ou 0) ?");
+            scanf("%d", &GameFull);
+        }while(GameFull == 0);
+        printf("tu es vraiment sÃ»r (1 ou 0) ?");
+        scanf("%d", &End);
+    }while(End == 0);
+    printf("Merci beaucoup d'avoir test notre programme :-)");
+    Sleep(5000);
+    return 0;
 }
 
 int menu()
@@ -193,12 +213,14 @@ int menu_2(int nombre_de_manche)
     printf("<----------------Choix----------------> \n");
     if(nombre_de_manche == 1)
     {
-        printf("Press [1] pour crier 'Dame de cœur ! À vous l'honneur ! Dame de pique, à vous la suite !' \n");
+        printf("Press [1] pour crier 'Dame de cÅ“ur ! Ã€ vous l'honneur ! Dame de pique, Ã  vous la suite !' \n");
     }
     printf("Press [2] pour verifier vos carte ;-) \n");
-    printf("Press [3] pour relire les régles ! \n");
+    printf("Press [3] pour relire les rÃ©gles ! \n");
     printf("Press [4] pour jouer");
-    printf("Press [5] pour savoir ton nombre de 'kilo de merde' ");
+    printf("Press [5] pour savoir ton nombre de 'kilo de merde'");
+    printf("Press [6] pour passer votre tour");
+    printf("Press [7] pour quitter la partie");
     printf("votre choix : ");
     scanf("%d", &choix);
 }
