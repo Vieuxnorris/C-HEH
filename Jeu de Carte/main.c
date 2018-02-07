@@ -218,7 +218,7 @@ int verification_first_time(int joueur[10][5], int nombre_de_joueur)
 
 void Game(int joueur[10][5],int color[10][5],int nombre_de_joueur, int nombre_de_manche,int nombre_de_carte, int deck_color[52][5],int deck_carte[52][52])
 {
-    int i,j,k,temp=1;
+    int i,j,k,temp=1,score=0;
     int manche=1,qui_est_tu=0, votre_carte=0;
     int Winner=1,GameFull=1,End=1;
     do
@@ -284,7 +284,8 @@ void Game(int joueur[10][5],int color[10][5],int nombre_de_joueur, int nombre_de
                 case 5:
                     system("cls");
                     printf("joueur %d \n",temp);
-                    compteur_de_score(joueur,color,nombre_de_joueur,temp);
+                    score = compteur_de_score(joueur,color,nombre_de_joueur,temp);
+                    printf("voici votre score : %d \n\n", score);
                     if(temp > nombre_de_joueur)
                     {
                         temp = 1;
@@ -382,10 +383,11 @@ void pioche(int joueur[10][5],int color[10][5], int nombre_de_joueur,int votre_c
         }
 }
 
+//void camouflage()
 
 int compteur_de_score(int joueur[10][5], int color[10][5], int nombre_joueur,int ton_joueur)
 {
-    int i,j,score;
+    int i,j,score=0;
     for(i=ton_joueur;i<=ton_joueur;i++)
     {
         for(j=1;j<=4;j++)
@@ -410,7 +412,7 @@ int compteur_de_score(int joueur[10][5], int color[10][5], int nombre_joueur,int
             {
                 score += 100;
             }
-            return score;
         }
+        return score;
     }
 }
