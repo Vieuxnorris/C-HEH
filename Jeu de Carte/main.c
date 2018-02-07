@@ -3,8 +3,8 @@
 #include <time.h>
 #include <windows.h>
 
-void carte_alea(int joueur[10][5][5],int nombre_joueur);
-void Affichage_de_main(int joueur[10][5][5],int joueur_nombre);
+void carte_alea(int joueur[10][5],int color[10][5],int nombre_joueur);
+void Affichage_de_main(int joueur[10][5],int color[10][5],int joueur_nombre);
 int menu();
 
 int main()
@@ -12,7 +12,8 @@ int main()
     int nombre_joueur,min=0,max=54,nombre_de_manches,choix_joueur,joueur_nombre;
     int validation = 0;
     int i,j,k;
-    int joueur[10][5][5];
+    int joueur[10][5];
+    int color[10][5];
     int nombre_de_carte = 54;
     int time_machine = clock();
 
@@ -41,17 +42,13 @@ int main()
         for(j=0;j<4;j++)
         {
             nombre_de_carte--;
-            for(k=1;k<=4;k++)
-            {
-
-            }
         }
         printf("voici joueur %d votre nombre de carte %d \n", i, j);
     }
     printf("voici le nombre de cartes disponible : %d \n \n", nombre_de_carte);
 
     Sleep(5000);
-    carte_alea(joueur,nombre_joueur);
+    carte_alea(joueur,color,nombre_joueur);
     system("cls");
     do
     {
@@ -66,19 +63,19 @@ int main()
                 printf("tu es quel joueur ? ");
                 scanf("%d", &joueur_nombre);
             }while(joueur_nombre <= nombre_joueur-nombre_joueur || joueur_nombre > nombre_joueur);
-            Affichage_de_main(joueur,joueur_nombre);
-            Sleep(10000);
+            Affichage_de_main(joueur,color,joueur_nombre);
+            Sleep(5000);
             system("cls");
             break;
         case 2:
             system("cls");
             printf("<----------------Nouvelle Pioche---------------->\n\n\n");
-            carte_alea(joueur,nombre_joueur);
+            carte_alea(joueur,color,nombre_joueur);
             Sleep(10000);
             break;
         case 3:
             system("cls");
-            Game(joueur, nombre_joueur, nombre_de_manches,nombre_de_carte);
+            Game(joueur, color, nombre_joueur, nombre_de_manches,nombre_de_carte);
             choix_joueur = 5;
             break;
         case 4:
@@ -94,41 +91,46 @@ int main()
 
 
 
-void carte_alea(int joueur[10][5][5],int nombre_joueur)
+void carte_alea(int joueur[10][5],int color[10][5],int nombre_joueur)
 {
-    int i=0,j=0,k=0,valeur_carte,valeur_couleur;
+    int i=0,j=0,valeur_carte,valeur_couleur;
     for(i=1;i<=nombre_joueur;i++)
     {
         for(j=1;j<=4;j++)
         {
-            for(k=1;k<=1;k++)
-            {
-                valeur_couleur = rand() % 4+1;
-                joueur[i][j][k] = valeur_couleur;
-                valeur_carte = rand() % 15+1;
-                joueur[i][k][j] = valeur_carte;
-                printf("joueur : %d \t carte : %d \t couleur : %d \n", i, joueur[i][k][j], joueur[i][j][k]);
-            }
+            valeur_carte = rand() %15+1;
+            joueur[i][j] = valeur_carte;
+            printf("carte : %d \t", joueur[i][j]);
         }
         printf("\n");
+        for(j=1;j<=4;j++)
+        {
+            valeur_couleur = rand() %4+1;
+            color[i][j] = valeur_couleur;
+            printf("couleur : %d \t", color[i][j]);
+        }
+        printf("\n\n");
     }
 }
 
 
 
-void Affichage_de_main(int joueur[10][5][5],int joueur_nombre)
+void Affichage_de_main(int joueur[10][5],int color[10][5],int joueur_nombre)
 {
-    int i,j,k,valeur_couleur;
+    int i=0,j=0,valeur_couleur;
 
     for(i=joueur_nombre;i<=joueur_nombre;i++)
     {
         for(j=1;j<=4;j++)
         {
-            for(k=1;k<=1;k++)
-            {
-                printf("voici les cartes : %d \t couleur : %d \n",joueur[i][k][j] ,joueur[i][j][k]);
-            }
+            printf("carte : %d \t", joueur[i][j]);
         }
+        printf("\n");
+        for(j=1;j<=4;j++)
+        {
+            printf("couleur : %d \t", color[i][j]);
+        }
+        printf("\n\n");
     }
 }
 
@@ -140,17 +142,20 @@ void regle()
     printf("Lorsque l'un des joueurs a quatre cartes de même valeur (un roi, une dame, etc.) ou sauf à trois joueurs, 4 cartes du même signe (cœur, pique, trèfle ou carreau), il doit attendre que tout le monde ait quatre cartes en main. Une fois que c'est le cas, il doit poser sa main sur le « tas de merde » et tous les joueurs doivent l'imiter au plus vite. Le dernier à avoir posé sa main sur le « tas de merde » doit piocher une carte dans ce dernier et la poser devant lui, face visible. Il gagne autant de kilos de merde que la valeur indiquée par la carte. \n\n");
 }
 
-void Game(int joueur[10][5][5],int nombre_de_joueur, int nombre_de_manche,int nombre_de_carte)
+void Game(int joueur[10][5],int color[10][1],int nombre_de_joueur, int nombre_de_manche,int nombre_de_carte)
 {
     int i,j,k;
     int manche=1,qui_est_tu=0, votre_carte=0;
-    int Winner=0,GameFull=0,End=0;
+    int Winner=1,GameFull=1,End=1;
     do
     {
+        End = 1;
         do
         {
+            GameFull = 1;
             do
             {
+                Winner = 1;
                 if(manche == 1)
                 {
                     i = rand() % nombre_de_joueur+1;
@@ -166,7 +171,7 @@ void Game(int joueur[10][5][5],int nombre_de_joueur, int nombre_de_manche,int no
                             system("cls");
                             printf("joueur %d dit : Dame de cœur ! À vous l'honneur ! Dame de pique, à vous la suite ! \n\n\n",i);
                             manche++;
-                            if(qui_est_tu < nombre_de_joueur)
+                            if(qui_est_tu <= nombre_de_joueur)
                             {
                               qui_est_tu++;
                             }
@@ -174,20 +179,23 @@ void Game(int joueur[10][5][5],int nombre_de_joueur, int nombre_de_manche,int no
                     }
                 case 2:
                     system("cls");
-                    Affichage_de_main(joueur, nombre_de_joueur);
+                    printf("joueur %d \n",i);
+                    Affichage_de_main(joueur,color, i);
                     manche++;
                     break;
                 case 3:
                     system("cls");
+                    printf("joueur %d \n",i);
                     regle();
                     manche++;
                     break;
                 case 4:
                     system("cls");
-                    Affichage_de_main(joueur, nombre_de_joueur);
+                    printf("joueur %d \n",i);
+                    Affichage_de_main(joueur,color, i);
                     printf("qu'elle carte voulais vous mettre sur la table (1,2,3,4): ");
                     scanf("%d", &votre_carte);
-                    pioche(joueur,nombre_de_joueur,votre_carte);
+                    pioche(joueur,color,nombre_de_joueur,votre_carte);
                     nombre_de_carte--;
                     if(nombre_de_carte == 0 || manche >= nombre_de_manche)
                     {
@@ -195,7 +203,7 @@ void Game(int joueur[10][5][5],int nombre_de_joueur, int nombre_de_manche,int no
                         Winner = 0;
                     }
                     i++;
-                    if(i == nombre_de_joueur)
+                    if(i > nombre_de_joueur)
                     {
                         i = 1;
                         manche++;
@@ -203,11 +211,17 @@ void Game(int joueur[10][5][5],int nombre_de_joueur, int nombre_de_manche,int no
                     break;
                 case 5:
                     system("cls");
+                    printf("joueur %d \n",i);
                     manche++;
                     break;
                 case 6:
                     system("cls");
+                    printf("joueur %d \n",i);
                     i++;
+                    if(i > nombre_de_joueur)
+                    {
+                        i = 1;
+                    }
                     manche++;
                     break;
                 case 7:
@@ -215,16 +229,16 @@ void Game(int joueur[10][5][5],int nombre_de_joueur, int nombre_de_manche,int no
                     Winner = 0;
                     break;
                 }
-            }while(Winner == 0);
+            }while(Winner == 1);
             system("cls");
             printf("tu veux refaire une partie (1 ou 0) ?");
             scanf("%d", &GameFull);
             manche = 1;
-        }while(GameFull == 0);
+        }while(GameFull == 1);
         printf("tu es vraiment sûr (1 ou 0) ?");
         scanf("%d", &End);
         manche = 1;
-    }while(End == 0);
+    }while(End == 1);
     printf("Merci beaucoup d'avoir test notre programme :-) \n");
 }
 
@@ -261,19 +275,15 @@ int menu_2(int manche)
     return choix;
 }
 
-void pioche(int joueur[10][5][5], int nombre_de_joueur,int votre_carte)
+void pioche(int joueur[10][5],int color[10][5], int nombre_de_joueur,int votre_carte)
 {
-    int i,j,k;
-    srand(time(NULL));
+    int i,j;
     for(i=1;i<=nombre_de_joueur;i++)
     {
         for(j=votre_carte;j<=votre_carte;j++)
         {
-            for(k=1;k<=1;k++)
-            {
-                joueur[i][j][k] = rand() %4+1;
-                joueur[i][k][j] = rand() %15+1;
-            }
+            joueur[i][j] = rand() %15+1;
+            color[i][j] = rand() %4+1;
         }
     }
 }
