@@ -12,7 +12,7 @@ int main()
 {
     int nombre_joueur,min=0,max=52,nombre_de_manches,choix_joueur,joueur_nombre;
     int validation = 0;
-    int i,j,k;
+    int i,j;
     int joueur[10][5];
     int color[10][5];
     int deck_carte[52][52];
@@ -53,7 +53,6 @@ int main()
 
     Sleep(5000);
     carte_alea(joueur,color,nombre_joueur);
-    deck(deck_carte,deck_color);
     system("cls");
     do
     {
@@ -80,7 +79,7 @@ int main()
             break;
         case 3:
             system("cls");
-            Game(joueur,color,nombre_joueur,nombre_de_manches,nombre_de_carte);
+            Game(joueur,color,nombre_joueur,nombre_de_manches,nombre_de_carte,joueur_nombre);
             choix_joueur = 5;
             break;
         case 4:
@@ -140,7 +139,7 @@ void carte_alea(int joueur[10][5],int color[10][5],int nombre_joueur)
     int i=0,j=0,valeur_carte=0,valeur_couleur=0,valeur_max=0,valeur_min=0,p=2;
     if(nombre_joueur == 3)
     {
-        valeur_max = 13;
+        valeur_max = 14;
         valeur_min = 13-p;
     }
     else
@@ -149,7 +148,7 @@ void carte_alea(int joueur[10][5],int color[10][5],int nombre_joueur)
         {
             p++;
         }
-        valeur_max = 13;
+        valeur_max = 14;
         valeur_min = 13-p;
     }
 
@@ -216,10 +215,10 @@ int verification_first_time(int joueur[10][5], int nombre_de_joueur)
     }
 }
 
-void Game(int joueur[10][5],int color[10][5],int nombre_de_joueur, int nombre_de_manche,int nombre_de_carte, int deck_color[52][5],int deck_carte[52][52])
+void Game(int joueur[10][5],int color[10][5],int nombre_de_joueur, int nombre_de_manche,int nombre_de_carte, int deck_color[52][5],int deck_carte[52][52],int joueur_nombre)
 {
     int i,j,k,temp=1,score=0;
-    int manche=1,qui_est_tu=0, votre_carte=0;
+    int manche=0, votre_carte=0;
     int Winner=1,GameFull=1,End=1;
     do
     {
@@ -230,25 +229,21 @@ void Game(int joueur[10][5],int color[10][5],int nombre_de_joueur, int nombre_de
             do
             {
                 Winner = 1;
-                if(manche == 1)
+                if(manche == 0)
                 {
                     i = verification_first_time(joueur,nombre_de_joueur);
                     printf("joueur %d à toi de commencer ! \n\n", i);
                 }
                 int choix=0;
-                choix = menu_2(manche);
+                choix = menu_2(manche,joueur,color,nombre_de_joueur,temp);
                 switch(choix)
                 {
-                    if(manche == 1)
+                    if(manche == 0)
                     {
                         case 1:
                             system("cls");
                             printf("joueur %d dit : Dame de cœur ! À vous l'honneur ! Dame de pique, à vous la suite ! \n\n\n",temp);
                             manche++;
-                            if(qui_est_tu <= nombre_de_joueur)
-                            {
-                              qui_est_tu++;
-                            }
                             break;
                     }
                 case 2:
@@ -334,20 +329,29 @@ int menu()
     return choix;
 }
 
-int menu_2(int manche)
+int menu_2(int manche, int joueur[10][5], int color[10][5], int nombre_de_joueur, int votre_joueur)
 {
-    int choix;
+    int choix,winner;
     printf("<----------------Choix----------------> \n");
-    if(manche == 1)
+    if(manche == 0)
     {
         printf("Press [1] pour crier 'Dame de cœur ! À vous l'honneur ! Dame de pique, à vous la suite !' \n");
+        printf("Press [7] pour quitter la partie\n");
     }
-    printf("Press [2] pour verifier vos carte ;-) \n");
-    printf("Press [3] pour relire les régles ! \n");
-    printf("Press [4] pour jouer\n");
-    printf("Press [5] pour savoir ton nombre de 'kilo de merde'\n");
-    printf("Press [6] pour passer votre tour\n");
-    printf("Press [7] pour quitter la partie\n");
+    else
+    {
+        printf("Press [2] pour verifier vos carte ;-) \n");
+        printf("Press [3] pour relire les régles ! \n");
+        printf("Press [4] pour jouer\n");
+        printf("Press [5] pour savoir ton nombre de 'kilo de merde'\n");
+        printf("Press [6] pour passer votre tour\n");
+        printf("Press [7] pour quitter la partie\n");
+    }
+    printf("%d \n", win(joueur,color,nombre_de_joueur,votre_joueur));
+    if(win(joueur,color,nombre_de_joueur,votre_joueur) == 4)
+    {
+        printf("Press [8] pour Time to win !!!!\n");
+    }
     printf("votre choix : ");
     scanf("%d", &choix);
     return choix;
@@ -357,33 +361,30 @@ void pioche(int joueur[10][5],int color[10][5], int nombre_de_joueur,int votre_c
 {
     int i,j,valeur_test,swap;
     Affichage_de_main(joueur,color,joueur_de_droite);
-    printf("qu'elle est la carte que vous voulez changer : ");
+    printf("qu'elle est la carte que vous voulez changer (1,2,3,4) : ");
     scanf("%d", &votre_carte);
     if(joueur_de_droite+1 > nombre_de_joueur)
     {
-        joueur_de_droite = 0;
+        joueur_de_droite = 1;
     }
-    Affichage_de_main(joueur,color,joueur_de_droite+1);
-    printf("qu'elle carte du joueur %d voulez-vous echanger ?",joueur_de_droite+1);
+    printf("qu'elle carte du joueur %d voulez-vous echanger (1,2,3,4) ?",joueur_de_droite+1);
     scanf("%d", &valeur_test);
-        for(i=1;i<=nombre_de_joueur;i++)
+    for(i=1;i<=nombre_de_joueur;i++)
+    {
+        for(j=1;j<=1;j++)
         {
-            for(j=1;j<=1;j++)
-            {
-                swap = joueur[joueur_de_droite][votre_carte];
-                joueur[joueur_de_droite][votre_carte] = joueur[joueur_de_droite+1][valeur_test];
-                joueur[joueur_de_droite+1][valeur_test] = swap;
-            }
-            for(j=1;j<=1;j++)
-            {
-                swap = color[joueur_de_droite][votre_carte];
-                color[joueur_de_droite][votre_carte] = color[joueur_de_droite+1][valeur_test];
-                color[joueur_de_droite+1][valeur_test] = swap;
-            }
+            swap = joueur[joueur_de_droite][votre_carte];
+            joueur[joueur_de_droite][votre_carte] = joueur[joueur_de_droite+1][valeur_test];
+            joueur[joueur_de_droite+1][valeur_test] = swap;
         }
+        for(j=1;j<=1;j++)
+        {
+            swap = color[joueur_de_droite][votre_carte];
+            color[joueur_de_droite][votre_carte] = color[joueur_de_droite+1][valeur_test];
+            color[joueur_de_droite+1][valeur_test] = swap;
+        }
+    }
 }
-
-//void camouflage()
 
 int compteur_de_score(int joueur[10][5], int color[10][5], int nombre_joueur,int ton_joueur)
 {
@@ -414,5 +415,23 @@ int compteur_de_score(int joueur[10][5], int color[10][5], int nombre_joueur,int
             }
         }
         return score;
+    }
+}
+
+
+int win(int joueur[10][5], int color[10][5],int nombre_de_joueur, int votre_joueur)
+{
+    int i,j,compteur=0,valeur_enregistrer;
+
+    for(i=votre_joueur;i<=votre_joueur;i++)
+    {
+        for(j=1;j<=4;j++)
+        {
+            if(joueur[i][1] == joueur[i][j])
+            {
+                compteur++;
+            }
+        }
+        return compteur;
     }
 }
