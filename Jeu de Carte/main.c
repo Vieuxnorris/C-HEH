@@ -18,7 +18,6 @@ int main()
     int deck_carte[52][52];
     int deck_color[52][5];
     int nombre_de_carte = 52;
-    int time_machine = clock();
 
     srand(time(NULL));
 
@@ -289,18 +288,21 @@ void Game(int joueur[10][5],int color[10][5],int nombre_de_joueur, int nombre_de
                     break;
                 case 6:
                     system("cls");
-                    printf("joueur %d \n",temp);
                     temp++;
                     if(temp > nombre_de_joueur)
                     {
                         temp = 1;
                         manche++;
                     }
+                    printf("joueur %d \n",temp);
                     break;
                 case 7:
                     system("cls");
                     Winner = 0;
                     break;
+                case 8:
+                    system("cls");
+                    time_machine(joueur[10][5]);
                 }
             }while(Winner == 1);
             system("cls");
@@ -347,7 +349,6 @@ int menu_2(int manche, int joueur[10][5], int color[10][5], int nombre_de_joueur
         printf("Press [6] pour passer votre tour\n");
         printf("Press [7] pour quitter la partie\n");
     }
-    printf("%d \n", win(joueur,color,nombre_de_joueur,votre_joueur));
     if(win(joueur,color,nombre_de_joueur,votre_joueur) == 4)
     {
         printf("Press [8] pour Time to win !!!!\n");
@@ -421,7 +422,7 @@ int compteur_de_score(int joueur[10][5], int color[10][5], int nombre_joueur,int
 
 int win(int joueur[10][5], int color[10][5],int nombre_de_joueur, int votre_joueur)
 {
-    int i,j,compteur=0,valeur_enregistrer;
+    int i,j,compteur=0,compteur_couleur=0,valeur_enregistrer;
 
     for(i=votre_joueur;i<=votre_joueur;i++)
     {
@@ -433,5 +434,19 @@ int win(int joueur[10][5], int color[10][5],int nombre_de_joueur, int votre_joue
             }
         }
         return compteur;
+    }
+}
+
+int time_machine(int joueur[10][5])
+{
+    int timer = clock();
+    
+    HWND Machine = FindWindow("Jeu de Carte",NULL);
+    SetForegroundWindow(Machine);
+    while(timer > 100)
+    {
+        printf("temps avant pression : %d", timer);
+        PostMessage(Machine,WM_KEYDOWN,VK_SPACE,0);
+        if()
     }
 }
