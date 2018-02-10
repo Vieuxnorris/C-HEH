@@ -170,7 +170,7 @@ void Affichage_de_main(int joueur[10][10],int color[10][10],int joueur_nombre,in
                 compteur++;
                 if(compteur == 4)
                 {
-                    time_machine(nombre_de_joueur);
+                    printf("Bravo %d tu as win !", joueur_nombre);
                 }
             }
         }
@@ -184,7 +184,7 @@ void Affichage_de_main(int joueur[10][10],int color[10][10],int joueur_nombre,in
                 compteur2++;
                 if(compteur2 == 4)
                 {
-                    time_machine(nombre_de_joueur);
+                    printf("Bravo %d tu as win !", joueur_nombre);
                 }
             }
         }
@@ -202,7 +202,7 @@ void Affichage_de_main(int joueur[10][10],int color[10][10],int joueur_nombre,in
             valeur_carte = joueur[i][1];
             if(joueur[i][j] == valeur_carte)
             {
-                time_machine(nombre_de_joueur);
+                printf("Bravo %d tu as win !", joueur_nombre);
             }
         }
         printf("\n");
@@ -215,38 +215,13 @@ void Affichage_de_main(int joueur[10][10],int color[10][10],int joueur_nombre,in
                 compteur2++;
                 if(compteur2 == 4)
                 {
-                    time_machine(nombre_de_joueur);
+                    printf("Bravo %d tu as win !", joueur_nombre);
                 }
             }
         }
         printf("\n\n");
     }
     }
-}
-
-void time_machine(int nombre_de_joueur)
-{
-    int i,j,score,tableau[10],minimum=999999;
-    for(i=1;i=nombre_de_joueur;i++)
-    {
-        time_t timer = time(NULL);
-        do
-        {
-            printf("rentre la touche 1 pour valider ton temps : ");
-            scanf("%d", &score);
-        }while(score == 1);
-        tableau[i] = timer;
-    }
-    for(i=1;i=nombre_de_joueur;i++)
-    {
-        printf("joueur %d tu as fait %d de temps", i, tableau[i]);
-        if(minimum > tableau[i])
-        {
-            minimum = tableau[i];
-        }
-    }
-    printf("le gagnant est celui qui a fait : %d", minimum);
-
 }
 
 void regle()
