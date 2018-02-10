@@ -165,13 +165,13 @@ void Affichage_de_main(int joueur[10][10],int color[10][10],int joueur_nombre,in
         {
             printf("carte : %d \t", joueur[i][j]);
             valeur_carte = joueur[i][1];
-            if(joueur[i][j] == valeur_couleur)
+            if(joueur[i][j] == valeur_carte)
             {
                 compteur++;
-            }
-            if(compteur == 4)
-            {
-                //time_machine();
+                if(compteur == 4)
+                {
+                    time_machine(nombre_de_joueur);
+                }
             }
         }
         printf("\n");
@@ -182,10 +182,10 @@ void Affichage_de_main(int joueur[10][10],int color[10][10],int joueur_nombre,in
             if(joueur[i][j] == valeur_couleur)
             {
                 compteur2++;
-            }
-            if(compteur2 == 4)
-            {
-                //time_machine();
+                if(compteur2 == 4)
+                {
+                    time_machine(nombre_de_joueur);
+                }
             }
         }
         printf("\n\n");
@@ -200,13 +200,9 @@ void Affichage_de_main(int joueur[10][10],int color[10][10],int joueur_nombre,in
         {
             printf("carte : %d \t", joueur[i][j]);
             valeur_carte = joueur[i][1];
-            if(joueur[i][j] == valeur_couleur)
+            if(joueur[i][j] == valeur_carte)
             {
-                compteur++;
-            }
-            if(compteur == 4)
-            {
-                //time_machine();
+                time_machine(nombre_de_joueur);
             }
         }
         printf("\n");
@@ -217,10 +213,10 @@ void Affichage_de_main(int joueur[10][10],int color[10][10],int joueur_nombre,in
             if(joueur[i][j] == valeur_couleur)
             {
                 compteur2++;
-            }
-            if(compteur2 == 4)
-            {
-                time_machine();
+                if(compteur2 == 4)
+                {
+                    time_machine(nombre_de_joueur);
+                }
             }
         }
         printf("\n\n");
