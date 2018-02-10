@@ -311,9 +311,11 @@ void Game(int joueur[10][5],int color[10][5],int nombre_de_joueur, int nombre_de
                         printf("tu es dans la merde mon ami ^^ donne ton numéro (1.2.3.4) : ");
                         scanf("%d", &temp_fake);
                         temp_fake++;
-                        if(temp_fake > nombre_de_joueur)
+                        temp++
+                        if(temp_fake > nombre_de_joueur || temp > nombre_de_joueur)
                         {
                             temp_fake = 1;
+                            temp = 1;
                         }
                         carte_alea(joueur,color,nombre_de_joueur,player_fake,temp_fake);
                         system("cls");
