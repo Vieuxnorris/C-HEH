@@ -4,7 +4,7 @@
 #include <windows.h>
 
 void carte_alea(int joueur[10][10],int color[10][10],int nombre_joueur,int player_fake,int temp);
-void Affichage_de_main(int joueur[10][10],int color[10][10],int joueur_nombre,int player_fake,int fake_temp);
+void Affichage_de_main(int joueur[10][10],int color[10][10],int joueur_nombre,int player_fake,int fake_temp,int nombre_de_joueur);
 void pioche(int joueur[10][10],int color[10][10], int nombre_de_joueur,int votre_carte,int nombre_de_carte,int joueur_de_droite,int player_fake,int fake_temp);
 int menu();
 
@@ -71,7 +71,7 @@ int main()
                 scanf("%d", &joueur_nombre);
                 fflush(stdin);
             }while(joueur_nombre <= nombre_joueur-nombre_joueur || joueur_nombre > nombre_joueur);
-            Affichage_de_main(joueur,color,joueur_nombre,player_fake,temp_fake);
+            Affichage_de_main(joueur,color,joueur_nombre,player_fake,temp_fake,nombre_joueur);
             Sleep(5000);
             system("cls");
             break;
@@ -155,25 +155,7 @@ void carte_alea(int joueur[10][10],int color[10][10],int nombre_joueur,int playe
     }
 }
 
-int chasse_d_eau(int joueur[10][10],int joueur_nombre,int nombre_joueur)
-{
-    int i,j;
-    int chasse_eau=0;
-    for(i=1;i<=joueur_nombre;i++)
-    {
-        for(j=1;j<=10;j++)
-        {
-            if(joueur[i][j] == 7)
-            {
-                chasse_eau = 1;
-                return chasse_eau;
-            }
-        }
-    }
-}
-
-
-void Affichage_de_main(int joueur[10][10],int color[10][10],int joueur_nombre,int player_fake,int fake_temp)
+void Affichage_de_main(int joueur[10][10],int color[10][10],int joueur_nombre,int player_fake,int fake_temp,int nombre_de_joueur)
 {
     int i=0,j=0,valeur_couleur=0,valeur_carte=0,compteur=0,compteur2=0;
 
@@ -217,15 +199,58 @@ void Affichage_de_main(int joueur[10][10],int color[10][10],int joueur_nombre,in
         for(j=1;j<=5;j++)
         {
             printf("carte : %d \t", joueur[i][j]);
+            valeur_carte = joueur[i][1];
+            if(joueur[i][j] == valeur_couleur)
+            {
+                compteur++;
+            }
+            if(compteur == 4)
+            {
+                //time_machine();
+            }
         }
         printf("\n");
         for(j=1;j<=5;j++)
         {
             printf("couleur : %d \t", color[i][j]);
+            valeur_couleur = color[i][1];
+            if(joueur[i][j] == valeur_couleur)
+            {
+                compteur2++;
+            }
+            if(compteur2 == 4)
+            {
+                time_machine();
+            }
         }
         printf("\n\n");
     }
     }
+}
+
+void time_machine(int nombre_de_joueur)
+{
+    int i,j,score,tableau[10],minimum=999999;
+    for(i=1;i=nombre_de_joueur;i++)
+    {
+        time_t timer = time(NULL);
+        do
+        {
+            printf("rentre la touche 1 pour valider ton temps : ");
+            scanf("%d", &score);
+        }while(score == 1);
+        tableau[i] = timer;
+    }
+    for(i=1;i=nombre_de_joueur;i++)
+    {
+        printf("joueur %d tu as fait %d de temps", i, tableau[i]);
+        if(minimum > tableau[i])
+        {
+            minimum = tableau[i];
+        }
+    }
+    printf("le gagnant est celui qui a fait : %d", minimum);
+
 }
 
 void regle()
@@ -275,18 +300,6 @@ void Game(int joueur[10][10],int color[10][10],int nombre_de_joueur, int nombre_
             GameFull = 1;
             do
             {
-                for(i=temp;i<=temp;i++)
-                {
-                    if(joueur_victoire[i] == temp)
-                    {
-                        temp++;
-                        if(temp > nombre_de_joueur)
-                        {
-                            temp = 1;
-                            manche++;
-                        }
-                    }
-                }
                 Winner = 1;
                 if(manche == 0)
                 {
@@ -309,7 +322,7 @@ void Game(int joueur[10][10],int color[10][10],int nombre_de_joueur, int nombre_
                 case 2:
                     system("cls");
                     printf("joueur %d \n",temp);
-                    Affichage_de_main(joueur,color,temp,player_fake,temp_fake);
+                    Affichage_de_main(joueur,color,temp,player_fake,temp_fake,nombre_de_joueur);
                     break;
                 case 3:
                     system("cls");
@@ -319,7 +332,7 @@ void Game(int joueur[10][10],int color[10][10],int nombre_de_joueur, int nombre_
                 case 4:
                     system("cls");
                     printf("joueur %d \n",temp);
-                    Affichage_de_main(joueur,color,temp,player_fake,temp_fake);
+                    Affichage_de_main(joueur,color,temp,player_fake,temp_fake,nombre_de_joueur);
                     system("cls");
                     pioche(joueur,color,nombre_de_joueur,votre_carte,nombre_de_carte,temp,player_fake,temp_fake);
                     if(nombre_de_carte == 0 || manche >= nombre_de_manche)
@@ -379,16 +392,6 @@ void Game(int joueur[10][10],int color[10][10],int nombre_de_joueur, int nombre_
                         system("cls");
                     }
                     break;
-                case 9:
-                    for(i=temp;i<=temp;i++)
-                    {
-                        fin_joueur[i] = 1;
-                        if(fin_joueur[i] == 1)
-                        {
-                            joueur_victoire[i] = temp;
-                        }
-                    }
-                    break;
                 }
             }while(Winner == 1);
             system("cls");
@@ -439,10 +442,6 @@ int menu_2(int manche, int joueur[10][10], int color[10][10], int nombre_de_joue
         printf("Press [6] pour passer votre tour\n");
         printf("Press [7] pour quitter la partie\n");
     }
-    if(chasse_d_eau(joueur,nombre_de_joueur,votre_joueur) == 1)
-    {
-        printf("Press [9] pour effacer ton nombre de tas de merde ! \n");
-    }
     printf("votre choix : ");
     scanf("%d", &choix);
     fflush(stdin);
@@ -451,29 +450,30 @@ int menu_2(int manche, int joueur[10][10], int color[10][10], int nombre_de_joue
 
 void pioche(int joueur[10][10],int color[10][10], int nombre_de_joueur,int votre_carte,int nombre_de_carte,int joueur_de_droite,int player_fake,int fake_temp)
 {
-    int i,j,valeur_test,swap;
-    Affichage_de_main(joueur,color,joueur_de_droite,player_fake,fake_temp);
+    int i,j,valeur_test,swap,valeur_joueur=0;
+    Affichage_de_main(joueur,color,joueur_de_droite,player_fake,fake_temp,nombre_de_joueur);
     printf("qu'elle est la carte que vous voulez changer (1,2,3,4) : ");
     scanf("%d", &votre_carte);
-    if(joueur_de_droite+1 > nombre_de_joueur)
+    valeur_joueur = joueur_de_droite+1;
+    if(valeur_joueur > nombre_de_joueur)
     {
-        joueur_de_droite = 1;
+        valeur_joueur = 1;
     }
-    printf("qu'elle carte du joueur %d voulez-vous echanger (1,2,3,4) ?",joueur_de_droite+1);
+    printf("qu'elle carte du joueur %d voulez-vous echanger (1,2,3,4) ?",valeur_joueur);
     scanf("%d", &valeur_test);
     for(i=1;i<=nombre_de_joueur;i++)
     {
         for(j=1;j<=1;j++)
         {
             swap = joueur[joueur_de_droite][votre_carte];
-            joueur[joueur_de_droite][votre_carte] = joueur[joueur_de_droite+1][valeur_test];
-            joueur[joueur_de_droite+1][valeur_test] = swap;
+            joueur[joueur_de_droite][votre_carte] = joueur[valeur_joueur][valeur_test];
+            joueur[valeur_joueur][valeur_test] = swap;
         }
         for(j=1;j<=1;j++)
         {
             swap = color[joueur_de_droite][votre_carte];
-            color[joueur_de_droite][votre_carte] = color[joueur_de_droite+1][valeur_test];
-            color[joueur_de_droite+1][valeur_test] = swap;
+            color[joueur_de_droite][votre_carte] = color[valeur_joueur][valeur_test];
+            color[valeur_joueur][valeur_test] = swap;
         }
     }
 }
