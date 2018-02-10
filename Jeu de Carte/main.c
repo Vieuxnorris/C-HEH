@@ -158,7 +158,7 @@ void carte_alea(int joueur[10][10],int color[10][10],int nombre_joueur,int playe
 void Affichage_de_main(int joueur[10][10],int color[10][10],int joueur_nombre,int player_fake,int fake_temp,int nombre_de_joueur)
 {
     int i=0,j=0,valeur_couleur=0,valeur_carte=0,compteur=0,compteur2=0;
-
+    char tableaux_couleur;
     for(i=joueur_nombre;i<=joueur_nombre;i++)
     {
         for(j=1;j<=4;j++)
@@ -327,6 +327,17 @@ void Game(int joueur[10][10],int color[10][10],int nombre_de_joueur, int nombre_
                     {
                         temp = 1;
                         manche++;
+                        if(manche == nombre_de_manche)
+                        {
+                            for(i=1;i<=nombre_de_joueur;i++)
+                            {
+                                score = compteur_de_score(joueur,color,nombre_de_joueur,temp,player_fake);
+                                printf("voici votre score : %d \n\n", score);
+                                temp++;
+                            }
+                            Sleep(5000);
+                            Winner=0;
+                        }
                     }
                     break;
                 case 6:
@@ -336,6 +347,17 @@ void Game(int joueur[10][10],int color[10][10],int nombre_de_joueur, int nombre_
                     {
                         temp = 1;
                         manche++;
+                        if(manche == nombre_de_manche)
+                        {
+                            for(i=1;i<=nombre_de_joueur;i++)
+                            {
+                                score = compteur_de_score(joueur,color,nombre_de_joueur,temp,player_fake);
+                                printf("voici votre score : %d \n\n", score);
+                                temp++;
+                            }
+                            Sleep(5000);
+                            Winner=0;
+                        }
                     }
                     printf("joueur %d \n",temp);
                     break;
@@ -358,6 +380,17 @@ void Game(int joueur[10][10],int color[10][10],int nombre_de_joueur, int nombre_
                             temp = 1;
                             nombre_de_carte--;
                             manche++;
+                            if(manche == nombre_de_manche)
+                            {
+                            for(i=1;i<=nombre_de_joueur;i++)
+                            {
+                                score = compteur_de_score(joueur,color,nombre_de_joueur,temp,player_fake);
+                                printf("voici votre score : %d \n\n", score);
+                                temp++;
+                            }
+                            Sleep(5000);
+                            Winner=0;
+                            }
                         }
                         carte_alea(joueur,color,nombre_de_joueur,player_fake,temp_fake);
                         system("cls");
