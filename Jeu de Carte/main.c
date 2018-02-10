@@ -155,21 +155,56 @@ void carte_alea(int joueur[10][10],int color[10][10],int nombre_joueur,int playe
     }
 }
 
+int chasse_d_eau(int joueur[10][10],int joueur_nombre,int nombre_joueur)
+{
+    int i,j;
+    int chasse_eau=0;
+    for(i=1;i<=joueur_nombre;i++)
+    {
+        for(j=1;j<=10;j++)
+        {
+            if(joueur[i][j] == 7)
+            {
+                chasse_eau = 1;
+                return chasse_eau;
+            }
+        }
+    }
+}
+
 
 void Affichage_de_main(int joueur[10][10],int color[10][10],int joueur_nombre,int player_fake,int fake_temp)
 {
-    int i=0,j=0,valeur_couleur;
+    int i=0,j=0,valeur_couleur=0,valeur_carte=0,compteur=0,compteur2=0;
 
     for(i=joueur_nombre;i<=joueur_nombre;i++)
     {
         for(j=1;j<=4;j++)
         {
             printf("carte : %d \t", joueur[i][j]);
+            valeur_carte = joueur[i][1];
+            if(joueur[i][j] == valeur_couleur)
+            {
+                compteur++;
+            }
+            if(compteur == 4)
+            {
+                //time_machine();
+            }
         }
         printf("\n");
         for(j=1;j<=4;j++)
         {
             printf("couleur : %d \t", color[i][j]);
+            valeur_couleur = color[i][1];
+            if(joueur[i][j] == valeur_couleur)
+            {
+                compteur2++;
+            }
+            if(compteur2 == 4)
+            {
+                //time_machine();
+            }
         }
         printf("\n\n");
     }
@@ -195,10 +230,20 @@ void Affichage_de_main(int joueur[10][10],int color[10][10],int joueur_nombre,in
 
 void regle()
 {
-    printf("Ce jeu se joue avec un jeu de 54 cartes que l'on séparera en deux tas, au début de la première manche. \n");
-    printf("Le jeu se déroule en plusieurs manches. Avant de jouer, les joueurs décident du nombre de manches à jouer. On peut en jouer autant que l'on veut, cela n'a pas d'importance. Les joueurs doivent former un cercle. On peut, aussi, décider de jouer autant de manches qu'il y a de cartes dans le « tas de merde ».");
-    printf("Le but de chaque joueur étant d'avoir quatre cartes de valeurs identiques en main, le premier à jouer choisit une carte qu'il ne veut pas garder et la fait passer à son voisin de gauche ou de droite ou à celui qui à la dame de pique sans la montrer aux autres. À ce moment, le premier joueur a trois cartes et le deuxième en a cinq. À son tour, le deuxième joueur fait passer une carte à son voisin. Ainsi, on tourne en faisant passer les cartes.");
-    printf("Lorsque l'un des joueurs a quatre cartes de même valeur (un roi, une dame, etc.) ou sauf à trois joueurs, 4 cartes du même signe (cœur, pique, trèfle ou carreau), il doit attendre que tout le monde ait quatre cartes en main. Une fois que c'est le cas, il doit poser sa main sur le « tas de merde » et tous les joueurs doivent l'imiter au plus vite. Le dernier à avoir posé sa main sur le « tas de merde » doit piocher une carte dans ce dernier et la poser devant lui, face visible. Il gagne autant de kilos de merde que la valeur indiquée par la carte. \n\n");
+    HANDLE console;
+    console = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(console, 6);
+    printf("Chaque joueur a en sa possession quatre cartes en début de manche. Le joueur qui débute la partie est celui qui a la dame de cœur. \n\n");
+    printf("Ce joueur commence en donnant une de ses quatre cartes au joueur qui se trouve sur sa droite. N’oubliez pas, le but du jeu est d’avoir entre vos mains quatre cartes identiques, c’est-à-dire avec le même nombre ou tête ou quatre cartes avec la même couleur (cœur, pique, carreau, trèfle). \n\n");
+    printf("Le second joueur effectue la même action avec le joueur qui se trouve à sa droite et ainsi de suite. \n\n");
+    printf("Lorsqu’un joueur réussit à récupérer quatre cartes identiques, il peut alors taper le tas de cartes qui se trouve au milieu de la table. Les autres joueurs doivent faire la même chose le plus rapidement possible, le dernier à taper le tas a perdu la partie. Il doit alors piocher une carte du tas, le nombre indiqué sur la carte correspond au kilo de merde qu’il récupère. \n\n");
+    SetConsoleTextAttribute(console, 12);
+    printf("ATTENTION : Le joueur qui a quatre cartes identiques doit attendre que tous les joueurs aient quatre cartes en main pour taper le tas. \n\n");
+    printf("Un joueur peut tromper ses adversaires en faisant semblant de taper le tas alors qu’il ne possède pas quatre cartes identiques. Si un joueur se fait avoir, et tape le tas, il doit alors piocher une carte. \n\n");
+    SetConsoleTextAttribute(console, 9);
+    printf("LA CHASSE D’EAU : Si un des joueurs pioche une carte avec le nombre 7, il pioche la chasse d’eau. Il a alors la chance de pouvoir remettre toutes les cartes piochées, ses kilos de merde, sous le tas.");
+    printf("La partie continue jusqu’à ce que les joueurs aient atteint le nombre de manche défini au départ.\n\n");
+    SetConsoleTextAttribute(console, 7);
 }
 
 int verification_first_time(int joueur[10][5], int nombre_de_joueur)
@@ -216,10 +261,10 @@ int verification_first_time(int joueur[10][5], int nombre_de_joueur)
     }
 }
 
-void Game(int joueur[10][5],int color[10][5],int nombre_de_joueur, int nombre_de_manche,int nombre_de_carte, int deck_color[52][5],int deck_carte[52][52],int joueur_nombre)
+void Game(int joueur[10][10],int color[10][10],int nombre_de_joueur, int nombre_de_manche,int nombre_de_carte, int deck_color[52][5],int deck_carte[52][52],int joueur_nombre)
 {
-    int i,j,k,temp=1,score=0;
-    int manche=0, votre_carte=0;
+    int i=0,j=0,k,temp=1,score=0,joueur_victoire[10],fin_joueur[10],valeur_de_la_carte=0;;
+    int manche=0, votre_carte=0,compteur=0;
     int Winner=1,GameFull=1,End=1;
     int player_fake=0,temp_fake=0;
     do
@@ -230,6 +275,18 @@ void Game(int joueur[10][5],int color[10][5],int nombre_de_joueur, int nombre_de
             GameFull = 1;
             do
             {
+                for(i=temp;i<=temp;i++)
+                {
+                    if(joueur_victoire[i] == temp)
+                    {
+                        temp++;
+                        if(temp > nombre_de_joueur)
+                        {
+                            temp = 1;
+                            manche++;
+                        }
+                    }
+                }
                 Winner = 1;
                 if(manche == 0)
                 {
@@ -238,6 +295,7 @@ void Game(int joueur[10][5],int color[10][5],int nombre_de_joueur, int nombre_de
                 }
                 int choix=0;
                 choix = menu_2(manche,joueur,color,nombre_de_joueur,temp);
+
                 switch(choix)
                 {
                     if(manche == 0)
@@ -252,13 +310,11 @@ void Game(int joueur[10][5],int color[10][5],int nombre_de_joueur, int nombre_de
                     system("cls");
                     printf("joueur %d \n",temp);
                     Affichage_de_main(joueur,color,temp,player_fake,temp_fake);
-                    manche++;
                     break;
                 case 3:
                     system("cls");
                     printf("joueur %d \n",temp);
                     regle();
-                    manche++;
                     break;
                 case 4:
                     system("cls");
@@ -311,14 +367,26 @@ void Game(int joueur[10][5],int color[10][5],int nombre_de_joueur, int nombre_de
                         printf("tu es dans la merde mon ami ^^ donne ton numéro (1.2.3.4) : ");
                         scanf("%d", &temp_fake);
                         temp_fake++;
-                        temp++
+                        temp++;
                         if(temp_fake > nombre_de_joueur || temp > nombre_de_joueur)
                         {
                             temp_fake = 1;
                             temp = 1;
+                            nombre_de_carte--;
+                            manche++;
                         }
                         carte_alea(joueur,color,nombre_de_joueur,player_fake,temp_fake);
                         system("cls");
+                    }
+                    break;
+                case 9:
+                    for(i=temp;i<=temp;i++)
+                    {
+                        fin_joueur[i] = 1;
+                        if(fin_joueur[i] == 1)
+                        {
+                            joueur_victoire[i] = temp;
+                        }
                     }
                     break;
                 }
@@ -326,10 +394,12 @@ void Game(int joueur[10][5],int color[10][5],int nombre_de_joueur, int nombre_de
             system("cls");
             printf("tu veux refaire une partie (1 ou 0) ?");
             scanf("%d", &GameFull);
+            fflush(stdin);
             manche = 1;
         }while(GameFull == 1);
         printf("tu es vraiment sûr (1 ou 0) ?");
         scanf("%d", &End);
+        fflush(stdin);
         manche = 1;
     }while(End == 1);
     printf("Merci beaucoup d'avoir test notre programme :-) \n");
@@ -351,9 +421,9 @@ int menu()
 
 }
 
-int menu_2(int manche, int joueur[10][5], int color[10][5], int nombre_de_joueur, int votre_joueur)
+int menu_2(int manche, int joueur[10][10], int color[10][10], int nombre_de_joueur, int votre_joueur)
 {
-    int choix,winner;
+    int i,j,choix;
     printf("<----------------Choix----------------> \n");
     if(manche == 0)
     {
@@ -362,20 +432,16 @@ int menu_2(int manche, int joueur[10][5], int color[10][5], int nombre_de_joueur
     }
     else
     {
-        printf("Press [2] pour verifier vos carte ;-) \n");
+        printf("Press [2] pour verifier vos carte + condition de victoire ;-) \n");
         printf("Press [3] pour relire les régles ! \n");
         printf("Press [4] pour jouer\n");
         printf("Press [5] pour savoir ton nombre de 'kilo de merde'\n");
         printf("Press [6] pour passer votre tour\n");
         printf("Press [7] pour quitter la partie\n");
     }
-    if(win(joueur,color,nombre_de_joueur,votre_joueur) == 4)
+    if(chasse_d_eau(joueur,nombre_de_joueur,votre_joueur) == 1)
     {
-        printf("Press [8] pour Time to win !!!!\n");
-    }
-    if(win(joueur,color,nombre_de_joueur,votre_joueur) < 4)
-    {
-        printf("Press [8] pour Fake win ;-) ! \n");
+        printf("Press [9] pour effacer ton nombre de tas de merde ! \n");
     }
     printf("votre choix : ");
     scanf("%d", &choix);
@@ -412,7 +478,7 @@ void pioche(int joueur[10][10],int color[10][10], int nombre_de_joueur,int votre
     }
 }
 
-int compteur_de_score(int joueur[10][5], int color[10][5], int nombre_joueur,int ton_joueur)
+int compteur_de_score(int joueur[10][10], int color[10][10], int nombre_joueur,int ton_joueur)
 {
     int i,j,valeur_fake=5,score=0;
     for(i=ton_joueur;i<=ton_joueur;i++)
@@ -443,34 +509,3 @@ int compteur_de_score(int joueur[10][5], int color[10][5], int nombre_joueur,int
         return score;
     }
 }
-
-int win(int joueur[10][5], int color[10][5],int nombre_de_joueur, int votre_joueur)
-{
-    int i,j,compteur=0,compteur2=0,compteur_couleur=0,valeur_enregistrer;
-
-    for(i=votre_joueur;i<=votre_joueur;i++)
-    {
-        for(j=1;j<=4;j++)
-        {
-            if(joueur[i][1] == joueur[i][j])
-            {
-                compteur++;
-            }
-            else if(color[i][1] == color[i][j])
-            {
-                compteur2++;
-            }
-        }
-        if(compteur2 == 4)
-        {
-            compteur = compteur2;
-            return compteur;
-        }
-        if(compteur == 4)
-        {
-            return compteur;
-        }
-    }
-
-}
-
