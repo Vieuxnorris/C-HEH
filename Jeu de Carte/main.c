@@ -8,7 +8,7 @@ Programme fait par :
     - Jordan Desaive
     - Carmelo Mirabile
     - Alessio Baio
-    - Wins Julien
+    - Julien Wins
 */
 
 
