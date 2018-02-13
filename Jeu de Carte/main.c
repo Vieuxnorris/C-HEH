@@ -3,7 +3,7 @@
 #include <time.h>
 #include <windows.h>
 
-/* <-------------Personne du Projet------------->
+/* <-------------Personnes du Projet------------->
 Programme fait par :
     - Jordan Desaive
     - Carmelo Mirabile
