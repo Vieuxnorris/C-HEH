@@ -185,7 +185,7 @@ void Affichage_de_main(int joueur[10][10],int color[10][10],int joueur_nombre,in
         {
             if(joueur[i][j] > 1 && joueur[i][j] < 15)
             {
-                printf("carte : %s \t\t", tableaux_graphique_carte[joueur[i][j]]);
+                printf("Carte : %s \t\t", tableaux_graphique_carte[joueur[i][j]]);
             }
             valeur_carte = joueur[i][1];
             if(joueur[i][j] == valeur_carte)
