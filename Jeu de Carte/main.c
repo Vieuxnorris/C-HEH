@@ -3,6 +3,15 @@
 #include <time.h>
 #include <windows.h>
 
+/* <-------------Personne du Projet------------->
+Programme fait par :
+    - Jordan Desaive
+    - Carmelo Mirabile
+    - Alessio Baio
+    - Wins Julien
+*/
+
+
 void carte_alea(int joueur[10][10],int color[10][10],int nombre_joueur,int player_fake,int temp);
 void Affichage_de_main(int joueur[10][10],int color[10][10],int joueur_nombre,int player_fake,int fake_temp,int nombre_de_joueur);
 void pioche(int joueur[10][10],int color[10][10], int nombre_de_joueur,int votre_carte,int nombre_de_carte,int joueur_de_droite,int player_fake,int fake_temp);
@@ -305,7 +314,7 @@ void Game(int joueur[10][10],int color[10][10],int nombre_de_joueur, int nombre_
                     {
                         case 1:
                             system("cls");
-                            printf("joueur %d dit : Dame de cœur ! À vous l'honneur ! Dame de pique, à vous la suite ! \n\n\n",temp);
+                            printf("joueur %d dit : 'Dame de coeur ! A vous l'honneur ! Dame de pique, a vous la suite !' \n\n\n",temp);
                             manche++;
                             break;
                     }
@@ -454,7 +463,7 @@ int menu_2(int manche, int joueur[10][10], int color[10][10], int nombre_de_joue
     printf("<----------------Choix----------------> \n");
     if(manche == 0)
     {
-        printf("Appuyez sur [1] pour crier 'Dame de coeur ! A vous l'honneur ! \nDame de pique, a vous la suite !' \n");
+        printf("Appuyez sur [1] pour crier 'Dame de coeur ! A vous l'honneur !\nDame de pique, a vous la suite !' \n\n");
         printf("Appuyez sur [7] pour quitter la partie.\n");
     }
     else
