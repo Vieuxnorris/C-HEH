@@ -303,7 +303,7 @@ void Game(int joueur[10][10],int color[10][10],int nombre_de_joueur, int nombre_
                 if(manche == 0)
                 {
                     i = verification_first_time(joueur,nombre_de_joueur);
-                    printf("joueur %d à toi de commencer ! \n\n", i);
+                    printf("joueur %d a toi de commencer ! \n\n", i);
                 }
                 int choix=0;
                 choix = menu_2(manche,joueur,color,nombre_de_joueur,temp);
