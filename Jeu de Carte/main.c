@@ -100,6 +100,8 @@ int main()
 void carte_alea(int joueur[10][10],int color[10][10],int nombre_joueur,int player_fake,int temp)
 {
     int i=0,j=0,k=0,c=0,valeur_carte=0,valeur_couleur=0,valeur_max=0,valeur_min=0,p=2;
+    char* tableaux_graphique_carte[] = {"Null","Null","Sept","Neuf","Huit","Six","Cinq","Quatre","Trois","Deux","Valet","Dame","Roi","As"};
+    char* tableaux_graphique_couleur[] = {"Null","Pique","Coeur","Carreau","Trefle"};
     int validation = 1;
     if(nombre_joueur == 3)
     {
@@ -122,14 +124,20 @@ void carte_alea(int joueur[10][10],int color[10][10],int nombre_joueur,int playe
         {
             valeur_carte = rand() %(valeur_max-valeur_min) + valeur_min;
             joueur[i][j] = valeur_carte;
-            printf("carte : %d \t", joueur[i][j]);
+            if(joueur[i][j] > 1 && joueur[i][j] < 15)
+            {
+                printf("carte : %s \t\t", tableaux_graphique_carte[joueur[i][j]]);
+            }
         }
         printf("\n");
         for(j=1;j<=4;j++)
         {
-            valeur_couleur = rand() % (4-1) + 1;
+            valeur_couleur = rand() % (5-1) + 1;
             color[i][j] = valeur_couleur;
-            printf("couleur : %d \t", color[i][j]);
+            if(color[i][j] > 0 && color[i][j] < 5)
+            {
+                printf("couleur : %s \t", tableaux_graphique_couleur[color[i][j]]);
+            }
         }
         printf("\n\n");
     }
@@ -146,7 +154,7 @@ void carte_alea(int joueur[10][10],int color[10][10],int nombre_joueur,int playe
             printf("\n");
             for(j=5;j<=5;j++)
             {
-                valeur_couleur = rand() % (4-1) + 1;
+                valeur_couleur = rand() % (5-1) + 1;
                 color[i][j] = valeur_couleur;
                 printf("couleur : %d \t", color[i][j]);
             }
@@ -158,12 +166,16 @@ void carte_alea(int joueur[10][10],int color[10][10],int nombre_joueur,int playe
 void Affichage_de_main(int joueur[10][10],int color[10][10],int joueur_nombre,int player_fake,int fake_temp,int nombre_de_joueur)
 {
     int i=0,j=0,valeur_couleur=0,valeur_carte=0,compteur=0,compteur2=0;
-    char tableaux_couleur;
+    char* tableaux_graphique_carte[] = {"NULL","NULL","Sept","Neuf","Huit","Six","Cinq","Quatre","Trois","Deux","Valet","Dame","Roi","As"};
+    char* tableaux_graphique_couleur[] = {"Null","Pique","Coeur","Carreau","Trefle"};
     for(i=joueur_nombre;i<=joueur_nombre;i++)
     {
         for(j=1;j<=4;j++)
         {
-            printf("carte : %d \t", joueur[i][j]);
+            if(joueur[i][j] > 1 && joueur[i][j] < 15)
+            {
+                printf("carte : %s \t\t", tableaux_graphique_carte[joueur[i][j]]);
+            }
             valeur_carte = joueur[i][1];
             if(joueur[i][j] == valeur_carte)
             {
@@ -177,7 +189,10 @@ void Affichage_de_main(int joueur[10][10],int color[10][10],int joueur_nombre,in
         printf("\n");
         for(j=1;j<=4;j++)
         {
-            printf("couleur : %d \t", color[i][j]);
+            if(color[i][j] > 0 && color[i][j] < 5)
+            {
+                printf("couleur : %s \t", tableaux_graphique_couleur[color[i][j]]);
+            }
             valeur_couleur = color[i][1];
             if(joueur[i][j] == valeur_couleur)
             {
