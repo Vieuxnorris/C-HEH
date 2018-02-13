@@ -24,17 +24,17 @@ int main()
     srand(time(NULL));
 
 
-    printf("Bienvenue dans notre programme \n\n");
+    printf("Bienvenue sur le jeu de cartes 'Le Tas de Merde' \n\n");
     do
     {
-        printf("combien de joueur avec vous (3 à 10) ? ");
+        printf("A combien voulez-vous jouer (Trois minimum, dix maximum) ? ");
         scanf("%d", &nombre_joueur);
         fflush(stdin);
         if(nombre_joueur >= 3 && nombre_joueur <= 10)
         {
             do
             {
-                printf("combien de manches voulais vous jouez ? ");
+                printf("\nEn combien de manches voulez-vous jouer ? ");
                 scanf("%d", &nombre_de_manches);
                 fflush(stdin);
                 validation = 1;
@@ -50,9 +50,9 @@ int main()
             nombre_de_carte--;
             deck_carte[nombre_de_carte][nombre_de_carte];
         }
-        printf("voici joueur %d votre nombre de carte %d \n", i, j);
+        printf("Joueur %d, voici votre nombre de cartes : %d\n", i, j);
     }
-    printf("voici le nombre de cartes disponible : %d \n \n", nombre_de_carte);
+    printf("\nLe nombre de cartes restant est de : %d \n \n", nombre_de_carte);
 
     Sleep(6500);
     carte_alea(joueur,color,nombre_joueur,player_fake,joueur_nombre);
@@ -67,7 +67,7 @@ int main()
             system("cls");
             do
             {
-                printf("tu es quel joueur ? ");
+                printf("Quel joueur es-tu ? ");
                 scanf("%d", &joueur_nombre);
                 fflush(stdin);
             }while(joueur_nombre <= nombre_joueur-nombre_joueur || joueur_nombre > nombre_joueur);
