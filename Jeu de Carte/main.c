@@ -483,7 +483,7 @@ void pioche(int joueur[10][10],int color[10][10], int nombre_de_joueur,int votre
     {
         valeur_joueur = 1;
     }
-    printf("Quelle carte du joueur %d voulez-vous echanger ? (1,2,3,4) : "),valeur_joueur);
+    printf("Quelle carte du joueur %d voulez-vous echanger ? (1,2,3,4) : ",valeur_joueur);
     scanf("%d", &valeur_test);
     for(i=1;i<=nombre_de_joueur;i++)
     {
