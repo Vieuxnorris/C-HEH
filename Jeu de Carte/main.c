@@ -89,6 +89,8 @@ int main()
         case 4:
             system("cls");
             regle();
+            system("pause");
+            system("cls");
             break;
         case 5:
             return 0;
@@ -239,23 +241,25 @@ void Affichage_de_main(int joueur[10][10],int color[10][10],int joueur_nombre,in
     }
 }
 
-void regle()
+void regle() //Correction lecture regles + "titre"
 {
     HANDLE console;
     console = GetStdHandle(STD_OUTPUT_HANDLE);
+    printf("***********************************REGLES*************************************");
     SetConsoleTextAttribute(console, 6);
-    printf("Chaque joueur a en sa possession quatre cartes en début de manche. Le joueur qui débute la partie est celui qui a la dame de cœur. \n\n");
-    printf("Ce joueur commence en donnant une de ses quatre cartes au joueur qui se trouve sur sa droite. N’oubliez pas, le but du jeu est d’avoir entre vos mains quatre cartes identiques, c’est-à-dire avec le même nombre ou tête ou quatre cartes avec la même couleur (cœur, pique, carreau, trèfle). \n\n");
-    printf("Le second joueur effectue la même action avec le joueur qui se trouve à sa droite et ainsi de suite. \n\n");
-    printf("Lorsqu’un joueur réussit à récupérer quatre cartes identiques, il peut alors taper le tas de cartes qui se trouve au milieu de la table. Les autres joueurs doivent faire la même chose le plus rapidement possible, le dernier à taper le tas a perdu la partie. Il doit alors piocher une carte du tas, le nombre indiqué sur la carte correspond au kilo de merde qu’il récupère. \n\n");
+    printf("Chaque joueur a en sa possession quatre cartes en debut de manche. \nLe joueur qui debute la partie est celui qui a la dame de coeur. \n\n");
+    printf("Ce joueur commence en donnant l'une de ses quatre cartes au joueur qui \nse trouve sur sa droite. N'oubliez pas, le but du jeu est d'avoir \nentre vos mains quatre cartes identiques,\ncest-a-dire avec le meme nombre ou tete ou quatre cartes \navec la meme couleur (coeur, pique, carreau, trefle). \n\n");
+    printf("Le second joueur effectue la meme action \navec le joueur qui se trouve a sa droite et ainsi de suite. \n\n");
+    printf("Lorsqu'un joueur reussit a recuperer quatre cartes identiques, il peut alors \ntaper le tas de cartes qui se trouve au milieu de la table. \nLes autres joueurs doivent faire la meme chose le plus rapidement possible. \nle dernier a taper le tas a perdu la partie. Il doit alors piocher une carte du tas, le nombre indique sur la carte correspond au kilo de merde qu'il recupere. \n\n");
     SetConsoleTextAttribute(console, 12);
     printf("ATTENTION : Le joueur qui a quatre cartes identiques doit attendre que tous les joueurs aient quatre cartes en main pour taper le tas. \n\n");
-    printf("Un joueur peut tromper ses adversaires en faisant semblant de taper le tas alors qu’il ne possède pas quatre cartes identiques. Si un joueur se fait avoir, et tape le tas, il doit alors piocher une carte. \n\n");
+    printf("Un joueur peut tromper ses adversaires en faisant semblant de taper le tas \nalors qu'il ne possede pas quatre cartes identiques. \nSi un joueur se fait avoir, et tape le tas, il doit alors piocher une carte. \n\n");
     SetConsoleTextAttribute(console, 9);
-    printf("LA CHASSE D’EAU : Si un des joueurs pioche une carte avec le nombre 7, il pioche la chasse d’eau. Il a alors la chance de pouvoir remettre toutes les cartes piochées, ses kilos de merde, sous le tas.");
-    printf("La partie continue jusqu’à ce que les joueurs aient atteint le nombre de manche défini au départ.\n\n");
+    printf("LA CHASSE D'EAU : Si un des joueurs pioche une carte avec le nombre 7, \nil pioche la chasse d'eau. Il a alors la chance de \npouvoir remettre toutes les cartes piochees, ses kilos de merde, sous le tas.\n");
+    printf("La partie continue jusqu'a ce que les joueurs aient atteint le nombre de manche defini au depart.\n\n");
     SetConsoleTextAttribute(console, 7);
 }
+
 
 int verification_first_time(int joueur[10][5], int nombre_de_joueur)
 {
@@ -312,8 +316,9 @@ void Game(int joueur[10][10],int color[10][10],int nombre_de_joueur, int nombre_
                     break;
                 case 3:
                     system("cls");
-                    printf("joueur %d \n",temp);
                     regle();
+                    system("pause");
+                    system("cls");
                     break;
                 case 4:
                     system("cls");
@@ -427,39 +432,39 @@ void Game(int joueur[10][10],int color[10][10],int nombre_de_joueur, int nombre_
     printf("Merci beaucoup d'avoir test notre programme :-) \n");
 }
 
-int menu()
+int menu() //Changement ecriture printf
 {
     int choix;
     printf("<--------------------Menu-------------------->\n");
-    printf("Press [1] pour afficher votre main\n");
-    printf("Press [2] pour melanger le jeu\n");
-    printf("Press [3] pour lancer (enfin) la partie ^^\n");
-    printf("Press [4] pour les regles \n");
-    printf("Press [5] pour quitter le jeu\n\n");
-    printf("taper votre choix : ");
+    printf("Appuyez sur [1] pour afficher votre main\n");
+    printf("Appuyez sur [2] pour melanger le deck\n");
+    printf("Appuyez sur [3] pour debuter la partie \n");
+    printf("Appuyez sur [4] pour afficher les regles \n");
+    printf("Appuyez sur [5] pour quitter le jeu\n\n");
+    printf("Que souhaitez-vous faire ? : ");
     scanf("%d", &choix);
     fflush(stdin);
     return choix;
 
 }
 
-int menu_2(int manche, int joueur[10][10], int color[10][10], int nombre_de_joueur, int votre_joueur)
+int menu_2(int manche, int joueur[10][10], int color[10][10], int nombre_de_joueur, int votre_joueur) //Changements printf
 {
     int i,j,choix;
     printf("<----------------Choix----------------> \n");
     if(manche == 0)
     {
-        printf("Press [1] pour crier 'Dame de cœur ! À vous l'honneur ! Dame de pique, à vous la suite !' \n");
-        printf("Press [7] pour quitter la partie\n");
+        printf("Appuyez sur [1] pour crier 'Dame de coeur ! A vous l'honneur ! \nDame de pique, a vous la suite !' \n");
+        printf("Appuyez sur [7] pour quitter la partie.\n");
     }
     else
     {
-        printf("Press [2] pour verifier vos carte + condition de victoire ;-) \n");
-        printf("Press [3] pour relire les régles ! \n");
-        printf("Press [4] pour jouer\n");
-        printf("Press [5] pour savoir ton nombre de 'kilo de merde'\n");
-        printf("Press [6] pour passer votre tour\n");
-        printf("Press [7] pour quitter la partie\n");
+        printf("Appuyez sur [2] pour verifier vos carte ainsi que les conditions de victoire\n");
+        printf("Appuyez sur [3] pour relire les regles\n");
+        printf("Appuyez sur [4] pour jouer\n");
+        printf("Appuyez sur [5] pour connaitre ton nombre de kilos de merde\n");
+        printf("Appuyez sur [6] pour passer votre tour\n");
+        printf("Appuyez sur [7] pour quitter la partie\n");
     }
     printf("votre choix : ");
     scanf("%d", &choix);
