@@ -476,14 +476,14 @@ void pioche(int joueur[10][10],int color[10][10], int nombre_de_joueur,int votre
 {
     int i,j,valeur_test,swap,valeur_joueur=0;
     Affichage_de_main(joueur,color,joueur_de_droite,player_fake,fake_temp,nombre_de_joueur);
-    printf("qu'elle est la carte que vous voulez changer (1,2,3,4) : ");
+    printf("Quelle est la carte que vous souhaitez changer ? (1,2,3,4) : ");
     scanf("%d", &votre_carte);
     valeur_joueur = joueur_de_droite+1;
     if(valeur_joueur > nombre_de_joueur)
     {
         valeur_joueur = 1;
     }
-    printf("qu'elle carte du joueur %d voulez-vous echanger (1,2,3,4) ?",valeur_joueur);
+    printf("Quelle carte du joueur %d voulez-vous echanger ? (1,2,3,4) : "),valeur_joueur);
     scanf("%d", &valeur_test);
     for(i=1;i<=nombre_de_joueur;i++)
     {
