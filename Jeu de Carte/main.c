@@ -54,7 +54,7 @@ int main()
     }
     printf("voici le nombre de cartes disponible : %d \n \n", nombre_de_carte);
 
-    Sleep(5000);
+    Sleep(6500);
     carte_alea(joueur,color,nombre_joueur,player_fake,joueur_nombre);
     system("cls");
     do
