@@ -303,7 +303,7 @@ void Game(int joueur[10][10],int color[10][10],int nombre_de_joueur, int nombre_
                 if(manche == 0)
                 {
                     i = verification_first_time(joueur,nombre_de_joueur);
-                    printf("joueur %d a toi de commencer ! \n\n", i);
+                    printf("Joueur %d, a toi de commencer ! \n\n", i);
                 }
                 int choix=0;
                 choix = menu_2(manche,joueur,color,nombre_de_joueur,temp);
@@ -314,7 +314,7 @@ void Game(int joueur[10][10],int color[10][10],int nombre_de_joueur, int nombre_
                     {
                         case 1:
                             system("cls");
-                            printf("joueur %d dit : 'Dame de coeur ! A vous l'honneur ! Dame de pique, a vous la suite !' \n\n\n",temp);
+                            printf("Le joueur %d dit : 'Dame de coeur ! A vous l'honneur ! \nDame de pique, a vous la suite !' \n\n\n",temp);
                             manche++;
                             break;
                     }
@@ -428,17 +428,17 @@ void Game(int joueur[10][10],int color[10][10],int nombre_de_joueur, int nombre_
                 }
             }while(Winner == 1);
             system("cls");
-            printf("tu veux refaire une partie (1 ou 0) ?");
+            printf("Voulez-vous refaire une partie (1 ou 0) ?");
             scanf("%d", &GameFull);
             fflush(stdin);
             manche = 1;
         }while(GameFull == 1);
-        printf("tu es vraiment sûr (1 ou 0) ?");
+        printf("Etes-vous vraiment surs (1 ou 0) ?");
         scanf("%d", &End);
         fflush(stdin);
         manche = 1;
     }while(End == 1);
-    printf("Merci beaucoup d'avoir test notre programme :-) \n");
+    printf("Merci beaucoup d'avoir teste notre programme :-) \n");
 }
 
 int menu() //Changement ecriture printf
@@ -468,14 +468,14 @@ int menu_2(int manche, int joueur[10][10], int color[10][10], int nombre_de_joue
     }
     else
     {
-        printf("Appuyez sur [2] pour verifier vos carte ainsi que les conditions de victoire\n");
+        printf("Appuyez sur [2] pour verifier vos cartes ainsi que les conditions de victoire\n");
         printf("Appuyez sur [3] pour relire les regles\n");
         printf("Appuyez sur [4] pour jouer\n");
         printf("Appuyez sur [5] pour connaitre ton nombre de kilos de merde\n");
         printf("Appuyez sur [6] pour passer votre tour\n");
         printf("Appuyez sur [7] pour quitter la partie\n");
     }
-    printf("votre choix : ");
+    printf("Votre choix : ");
     scanf("%d", &choix);
     fflush(stdin);
     return choix;
