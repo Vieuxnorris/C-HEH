@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1518690592 source:e:\project\jeu de carte opti\main.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+	<time.h>
+
