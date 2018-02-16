@@ -141,13 +141,13 @@ void affichage(int deck[13][4],int deck_couleur[13][4], int joueur,int joueur_ac
             {
                 fake_win[i] = 4;
             }
-            printf("carte : %s \t couleur : %s \n", tableaux_graphique_carte[deck[i][j]],tableaux_graphique_couleur[deck_couleur[i][j]]);
+            printf("Carte : %s \t Couleur : %s \n", tableaux_graphique_carte[deck[i][j]],tableaux_graphique_couleur[deck_couleur[i][j]]);
             if(deck[i][j] == deck[i][0] || deck_couleur[i][j] == deck_couleur[i][0])
             {
                 compteur++;
                 if(compteur == fake_win[i])
                 {
-                    printf("félicitation tu as gagné joueur %d", i);
+                    printf("Felicitations, joueur %d, tu as gagne ! ", i);
                     return 0;
                 }
             }
@@ -161,7 +161,7 @@ int menu() //Changement ecriture printf
     printf("<--------------------Menu-------------------->\n");
     printf("Appuyez sur [1] pour afficher votre main\n");
     printf("Appuyez sur [2] pour refaire un melange\n");
-    printf("Appuyez sur [3] pour lance le jeu\n");
+    printf("Appuyez sur [3] pour lancer le jeu\n");
     printf("Appuyez sur [4] pour afficher les regles \n");
     printf("Appuyez sur [5] pour quitter le jeu\n\n");
     printf("Que souhaitez-vous faire ? : ");
