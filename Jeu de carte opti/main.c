@@ -160,7 +160,7 @@ int menu() //Changement ecriture printf
     printf("<--------------------Menu-------------------->\n");
     printf("Appuyez sur [1] pour afficher votre main\n");
     printf("Appuyez sur [2] pour refaire un melange\n");
-    printf("Appuyez sur [3] pour lance le jeu\n");
+    printf("Appuyez sur [3] pour lancer le jeu\n");
     printf("Appuyez sur [4] pour afficher les regles \n");
     printf("Appuyez sur [5] pour quitter le jeu\n\n");
     printf("Que souhaitez-vous faire ? : ");
