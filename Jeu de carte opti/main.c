@@ -12,7 +12,7 @@ int main()
     int joueur_actuelle=0;
     int deck[13][4];
     int deck_couleur[13][4];
-    int fake_win[13] = {4};
+    int fake_win[13] = {4,4,4,4,4,4,4,4,4,4,4,4,4,4};
 
     srand(time(NULL));
 
@@ -26,9 +26,12 @@ int main()
         system("cls");
     }while(joueur < 3 || joueur > 10);
 
-    printf("En combien de manches voulez-vous jouer ? ");
-    scanf("%d", &nombre_de_manche);
-    fflush(stdin);
+    do
+    {
+        printf("En combien de manches voulez-vous jouer ? ");
+        scanf("%d", &nombre_de_manche);
+        fflush(stdin);
+    }while(nombre_de_manche < 0 || nombre_de_manche > 999);
 
     melange(deck,deck_couleur,joueur);
 
@@ -113,7 +116,7 @@ void affichage(int deck[13][4],int deck_couleur[13][4], int joueur,int joueur_ac
     int carte=9;
     int joueur_actuelle=0;
     int compteur=0;
-    int temp;
+    int temp=0;
 
     joueur_actuelle = 12-joueur_actu;
 
@@ -124,14 +127,22 @@ void affichage(int deck[13][4],int deck_couleur[13][4], int joueur,int joueur_ac
 
     for(i=joueur_actuelle;i>=joueur_actuelle;i--)
     {
-        temp = fake_win[i];
-        for(j=0;j<temp;j++)
+        for(j=0;j<fake_win[i];j++)
         {
+            if(j > 3)
+            {
+                deck[i][j] = deck[i-joueur][-1+temp];
+                temp++;
+            }
+            if(deck[i][j] == 7)
+            {
+                fake_win[i] = 4;
+            }
             printf("carte : %s \t couleur : %s \n", tableaux_graphique_carte[deck[i][j]],tableaux_graphique_couleur[deck_couleur[i][j]]);
             if(deck[i][j] == deck[i][0] || deck_couleur[i][j] == deck_couleur[i][0])
             {
                 compteur++;
-                if(compteur == 4)
+                if(compteur == fake_win[i])
                 {
                     printf("félicitation tu as gagné joueur %d", i);
                     return 0;
@@ -256,31 +267,43 @@ void game(int deck[13][4],int deck_couleur[13][4],int joueur,int joueur_actu,int
             break;
         case 5:
             system("cls");
-            temp = kilo(deck,deck_couleur,joueur,joueur_actu);
+            temp = kilo(deck,deck_couleur,joueur,joueur_actu,fake_win);
             printf("voici votre score : %d \n\n", temp);
             break;
         case 6:
             system("cls");
             joueur_actu++;
+            if(joueur_actu > joueur-1)
+            {
+                joueur_actu=0;
+                manche++;
+            }
             break;
         case 7:
+            system("cls");
             compteur++;
             joueur_actuelle = 12-joueur_actu;
             if(compteur==2)
             {
                 compteur=0;
-                for(i=joueur_actu;i<=joueur_actu;i++)
+                for(i=joueur_actuelle;i<=joueur_actuelle;i++)
                 {
                     fake_win[i] += 1;
                 }
 
+            }
+            joueur_actu++;
+            if(joueur_actu > joueur-1)
+            {
+                joueur_actu=0;
+                manche++;
             }
             break;
         case 8:
             system("cls");
             break;
         }
-    }while(choix != 7);
+    }while(choix != 8);
 }
 
 int menu_game(int manche)
@@ -299,7 +322,7 @@ int menu_game(int manche)
         printf("Appuyez sur [4] pour jouer\n");
         printf("Appuyez sur [5] pour connaitre ton nombre de kilos de merde\n");
         printf("Appuyez sur [6] pour passer votre tour\n");
-        printf("Appuyez sur [7] pour Fake Win");
+        printf("Appuyez sur [7] pour Fake Win\n");
         printf("Appuyez sur [8] pour quitter la partie\n");
         printf("votre choix : ");
     }
@@ -307,7 +330,7 @@ int menu_game(int manche)
     return choix;
 }
 
-int kilo(int deck[13][4], int deck_couleur[13][4], int joueur, int joueur_actu)
+int kilo(int deck[13][4], int deck_couleur[13][4], int joueur, int joueur_actu,int fake_win[13])
 {
     int i,j,joueur_actuelle,score=0;
 
@@ -315,7 +338,7 @@ int kilo(int deck[13][4], int deck_couleur[13][4], int joueur, int joueur_actu)
 
     for(i=joueur_actuelle;i<=joueur_actuelle;i++)
     {
-        for(j=0;j<4;j++)
+        for(j=0;j<fake_win[i];j++)
         {
             if(deck[joueur_actuelle][j] == 1)
             {
