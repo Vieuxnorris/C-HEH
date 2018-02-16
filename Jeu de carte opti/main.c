@@ -264,7 +264,6 @@ void game(int deck[13][4],int deck_couleur[13][4],int joueur,int joueur_actu,int
             break;
         }
     }while(choix != 7);
-    printf("")
 }
 
 int menu_game(int manche)
