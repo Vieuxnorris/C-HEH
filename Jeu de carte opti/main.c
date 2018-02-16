@@ -13,6 +13,7 @@ int main()
     int deck[13][4];
     int deck_couleur[13][4];
     int fake_win[13] = {4,4,4,4,4,4,4,4,4,4,4,4,4,4};
+    int nombre_de_carte = 52;
 
     srand(time(NULL));
 
@@ -43,7 +44,7 @@ int main()
         {
         case 1:
             system("cls");
-            affichage(deck,deck_couleur,joueur,joueur_actuelle,fake_win);
+            affichage(deck,deck_couleur,joueur,joueur_actuelle,fake_win,nombre_de_carte);
             break;
         case 2:
             system("cls");
@@ -51,7 +52,7 @@ int main()
             break;
         case 3:
             system("cls");
-            game(deck,deck_couleur,joueur,joueur_actuelle,nombre_de_manche,fake_win);
+            game(deck,deck_couleur,joueur,joueur_actuelle,nombre_de_manche,fake_win,nombre_de_carte);
         case 4:
             system("cls");
             regle();
@@ -108,7 +109,7 @@ void melange(int deck[13][4],int deck_couleur[13][4],int joueur)
     }
 }
 
-void affichage(int deck[13][4],int deck_couleur[13][4], int joueur,int joueur_actu,int fake_win[13])
+void affichage(int deck[13][4],int deck_couleur[13][4], int joueur,int joueur_actu,int fake_win[13],int nombre_de_carte)
 {
     int i,j;
     char* tableaux_graphique_carte[] = {"Roi","Dame","Valet","Deux","Trois","Quatre","Cinq","Six","Huit","Neuf","Sept","Dix","As"};
@@ -123,6 +124,7 @@ void affichage(int deck[13][4],int deck_couleur[13][4], int joueur,int joueur_ac
     for(i=3;i<joueur;i++)
     {
         carte--;
+        nombre_de_carte -= 4;
     }
 
     for(i=joueur_actuelle;i>=joueur_actuelle;i--)
@@ -188,11 +190,11 @@ void regle() //Correction lecture regles + "titre"
     system("cls");
 }
 
-void echange(int deck[13][4],int deck_couleur[13][4],int joueur,int joueur_actu,int fake_win[13])
+void echange(int deck[13][4],int deck_couleur[13][4],int joueur,int joueur_actu,int fake_win[13],int nombre_de_carte)
 {
     int i,j,valeur_joueur=0,carte=9,swap,votre_carte,votre_test,valeur_joueur_max=0;
 
-    affichage(deck,deck_couleur,joueur,joueur_actu,fake_win);
+    affichage(deck,deck_couleur,joueur,joueur_actu,fake_win,nombre_de_carte);
 
     valeur_joueur = 12-joueur_actu;
     valeur_joueur_max = valeur_joueur-1;
@@ -222,12 +224,12 @@ void echange(int deck[13][4],int deck_couleur[13][4],int joueur,int joueur_actu,
     }
 }
 
-void game(int deck[13][4],int deck_couleur[13][4],int joueur,int joueur_actu,int nombre_de_manche,int fake_win[13])
+void game(int deck[13][4],int deck_couleur[13][4],int joueur,int joueur_actu,int nombre_de_manche,int fake_win[13],int nombre_de_carte)
 {
     int i,j,choix,manche=0,temp,fin=0,compteur=0,joueur_actuelle=0;
     do
     {
-        choix = menu_game(manche);
+        choix = menu_game(manche,nombre_de_carte);
 
         if(manche == nombre_de_manche)
         {
@@ -249,7 +251,7 @@ void game(int deck[13][4],int deck_couleur[13][4],int joueur,int joueur_actu,int
                 }
         case 2:
             system("cls");
-            affichage(deck,deck_couleur,joueur,joueur_actu,fake_win);
+            affichage(deck,deck_couleur,joueur,joueur_actu,fake_win,nombre_de_carte);
             break;
         case 3:
             system("cls");
@@ -257,7 +259,7 @@ void game(int deck[13][4],int deck_couleur[13][4],int joueur,int joueur_actu,int
             break;
         case 4:
             system("cls");
-            echange(deck,deck_couleur,joueur,joueur_actu,fake_win);
+            echange(deck,deck_couleur,joueur,joueur_actu,fake_win,nombre_de_carte);
             joueur_actu++;
             if(joueur_actu > joueur-1)
             {
@@ -285,6 +287,7 @@ void game(int deck[13][4],int deck_couleur[13][4],int joueur,int joueur_actu,int
             joueur_actuelle = 12-joueur_actu;
             if(compteur==2)
             {
+                nombre_de_carte--;
                 compteur=0;
                 for(i=joueur_actuelle;i<=joueur_actuelle;i++)
                 {
@@ -306,7 +309,7 @@ void game(int deck[13][4],int deck_couleur[13][4],int joueur,int joueur_actu,int
     }while(choix != 8);
 }
 
-int menu_game(int manche)
+int menu_game(int manche,int nombre_de_carte)
 {
     int choix;
     printf("<----------------Choix----------------> \n");
@@ -322,7 +325,10 @@ int menu_game(int manche)
         printf("Appuyez sur [4] pour jouer\n");
         printf("Appuyez sur [5] pour connaitre ton nombre de kilos de merde\n");
         printf("Appuyez sur [6] pour passer votre tour\n");
-        printf("Appuyez sur [7] pour Fake Win\n");
+        if(nombre_de_carte == 0)
+        {
+            printf("Appuyez sur [7] pour Fake Win\n");
+        }
         printf("Appuyez sur [8] pour quitter la partie\n");
         printf("votre choix : ");
     }
