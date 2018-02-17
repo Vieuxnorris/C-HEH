@@ -254,7 +254,7 @@ int verification(int deck[13][4],int joueur_actu,int joueur)
 
 void game(int deck[13][4],int deck_couleur[13][4],int joueur,int joueur_actu,int nombre_de_manche,int fake_win[13],int nombre_de_carte)
 {
-    int i,j,choix,manche=0,temp,fin=0,compteur=0,joueur_actuelle=0;
+    int i,j,choix,manche=0,temp,fin=0,compteur=0,joueur_actuelle=0,min=0,temp2;
     do
     {
         if(manche == nombre_de_manche)
@@ -262,8 +262,15 @@ void game(int deck[13][4],int deck_couleur[13][4],int joueur,int joueur_actu,int
             system("cls");
             for(i=0;i<joueur;i++)
             {
-                printf("score du joueur %d : %d \n",i,kilo(deck,deck_couleur,joueur,i,fake_win));
+                temp2 = kilo(deck,deck_couleur,joueur,i,fake_win);
+                printf("score du joueur %d : %d \n",i,temp2);
+                if(temp2 > min)
+                {
+                    min = temp2;
+                    temp = i;
+                }
             }
+            printf("\n joueur %d tu as win ! \n\n", temp);
         }
         choix = menu_game(manche,nombre_de_carte,nombre_de_manche);
         switch(choix)
