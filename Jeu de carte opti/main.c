@@ -257,16 +257,15 @@ void game(int deck[13][4],int deck_couleur[13][4],int joueur,int joueur_actu,int
     int i,j,choix,manche=0,temp,fin=0,compteur=0,joueur_actuelle=0;
     do
     {
-        choix = menu_game(manche,nombre_de_carte);
-
         if(manche == nombre_de_manche)
         {
             system("cls");
             for(i=0;i<joueur;i++)
             {
-                kilo(deck,deck_couleur,joueur,i);
+                printf("score du joueur %d : %d \n",i,kilo(deck,deck_couleur,joueur,i,fake_win));
             }
         }
+        choix = menu_game(manche,nombre_de_carte,nombre_de_manche);
         switch(choix)
         {
             if(manche == 0)
@@ -337,7 +336,7 @@ void game(int deck[13][4],int deck_couleur[13][4],int joueur,int joueur_actu,int
     }while(choix != 8);
 }
 
-int menu_game(int manche,int nombre_de_carte)
+int menu_game(int manche,int nombre_de_carte,int nombre_de_manche)
 {
     int choix;
     printf("<----------------Choix----------------> \n");
@@ -346,19 +345,19 @@ int menu_game(int manche,int nombre_de_carte)
         printf("Appuyez sur [1] pour crier 'Dame de coeur ! A vous l'honneur !\nDame de pique, a vous la suite !' \n\n");
         printf("Appuyez sur [8] pour quitter la partie.\n");
     }
+    else if(manche == nombre_de_manche)
+    {
+        printf("Appuyez sur [8] pour quitter la partie\n");
+    }
     else
     {
-        printf("Appuyez sur [2] pour verifier vos carte ainsi que les conditions de victoire\n");
-        printf("Appuyez sur [3] pour relire les regles\n");
-        printf("Appuyez sur [4] pour jouer\n");
-        printf("Appuyez sur [5] pour connaitre ton nombre de kilos de merde\n");
-        printf("Appuyez sur [6] pour passer votre tour\n");
-        if(nombre_de_carte == 0)
-        {
-            printf("Appuyez sur [7] pour Fake Win\n");
-        }
-        printf("Appuyez sur [8] pour quitter la partie\n");
-        printf("votre choix : ");
+    printf("Appuyez sur [2] pour verifier vos carte ainsi que les conditions de victoire\n");
+    printf("Appuyez sur [3] pour relire les regles\n");
+    printf("Appuyez sur [4] pour jouer\n");
+    printf("Appuyez sur [5] pour connaitre ton nombre de kilos de merde\n");
+    printf("Appuyez sur [6] pour passer votre tour\n");
+    printf("Appuyez sur [7] pour Fake Win\n");
+    printf("votre choix : ");
     }
     scanf("%d",&choix);
     return choix;
