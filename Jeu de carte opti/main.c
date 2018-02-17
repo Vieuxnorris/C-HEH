@@ -29,7 +29,7 @@ int main()
     int joueur_actuelle=0;
     int deck[13][4];
     int deck_couleur[13][4];
-    int fake_win[13] = {4,4,4,4,4,4,4,4,4,4,4,4,4,4}; // variable pour savoir le nombre max de chaque joueur
+    int fake_win[13] = {4,4,4,4,4,4,4,4,4,4,4,4,4,4}; // variable pour savoir le nombre max de carte chaque joueur
     int nombre_de_carte = 52;
     int n;
 
