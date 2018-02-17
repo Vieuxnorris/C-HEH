@@ -156,7 +156,7 @@ void affichage(int deck[13][4],int deck_couleur[13][4], int joueur,int joueur_ac
                 compteur++;
                 if(compteur == 4+temp)
                 {
-                    printf("félicitation tu as gagné joueur %d \n\n", i);
+                    printf("Felicitations, Joueur %d, tu as gagne ! \n\n", i);
                     return 0;
                 }
             }
@@ -165,7 +165,7 @@ void affichage(int deck[13][4],int deck_couleur[13][4], int joueur,int joueur_ac
                 compteur2++;
                 if(compteur2 == 4+temp)
                 {
-                    printf("félicitation tu as gagné joueur %d \n\n", i);
+                    printf("Felicitations, Joueur %d, tu as gagne ! \n\n", i);
                     return 0;
                 }
             }
@@ -179,7 +179,7 @@ int menu() //Changement ecriture printf
     printf("<--------------------Menu-------------------->\n");
     printf("Appuyez sur [1] pour afficher votre main\n");
     printf("Appuyez sur [2] pour refaire un melange\n");
-    printf("Appuyez sur [3] pour lance le jeu\n");
+    printf("Appuyez sur [3] pour lancer le jeu\n");
     printf("Appuyez sur [4] pour afficher les regles \n");
     printf("Appuyez sur [5] pour quitter le jeu\n\n");
     printf("Que souhaitez-vous faire ? : ");
@@ -226,7 +226,7 @@ void echange(int deck[13][4],int deck_couleur[13][4],int joueur,int joueur_actu,
     {
         do
         {
-            printf("entrer votre carte : ");
+            printf("Entrez votre carte : ");
             scanf("%d", &votre_carte);
         }while(votre_carte < 0 || votre_carte > fake_win[i]);
     }
@@ -234,7 +234,7 @@ void echange(int deck[13][4],int deck_couleur[13][4],int joueur,int joueur_actu,
     {
         do
         {
-            printf("entrer la carte que vous voulez echanger : ");
+            printf("Entrez la carte que vous voulez echanger : ");
             scanf("%d", &votre_test);
         }while(votre_test < 0 || votre_test > fake_win[i]);
     }
@@ -282,14 +282,14 @@ void game(int deck[13][4],int deck_couleur[13][4],int joueur,int joueur_actu,int
             for(i=0;i<joueur;i++)
             {
                 temp2 = kilo(deck,deck_couleur,joueur,i,fake_win);
-                printf("score du joueur %d : %d \n",i,temp2);
+                printf("Score du joueur %d : %d \n",i,temp2);
                 if(temp2 > min)
                 {
                     min = temp2;
                     temp = i;
                 }
             }
-            printf("\n joueur %d tu as win ! \n\n", temp);
+            printf("\n Joueur %d tu as gagne ! \n\n", temp);
         }
         choix = menu_game(manche,nombre_de_carte,nombre_de_manche);
         switch(choix)
@@ -299,7 +299,7 @@ void game(int deck[13][4],int deck_couleur[13][4],int joueur,int joueur_actu,int
                 case 1:
                     system("cls");
                     temp2 = verification(deck,joueur_actu,joueur);
-                    printf("joueur %d dit : 'Dame de coeur ! A vous l'honneur ! Dame de pique, a vous la suite !' \n\n\n",temp2);
+                    printf("Joueur %d dit : 'Dame de coeur ! A vous l'honneur ! Dame de pique, a vous la suite !' \n\n\n",temp2);
                     joueur_actu = temp2;
                     manche++;
                     break;
@@ -325,7 +325,7 @@ void game(int deck[13][4],int deck_couleur[13][4],int joueur,int joueur_actu,int
         case 5:
             system("cls");
             temp = kilo(deck,deck_couleur,joueur,joueur_actu,fake_win);
-            printf("voici votre score : %d \n\n", temp);
+            printf("Voici votre score : %d \n\n", temp);
             break;
         case 6:
             system("cls");
