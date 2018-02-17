@@ -4,6 +4,15 @@
 #include <time.h>
 #include <string.h>
 
+/*
+*************************************************
+Credit dev: Alessio Baio
+            Carmelo Mirabile
+            Jordan Desaive
+            Wins Julien
+*************************************************
+*/
+
 int main()
 {
     int joueur=0;
@@ -141,13 +150,13 @@ void affichage(int deck[13][4],int deck_couleur[13][4], int joueur,int joueur_ac
             {
                 fake_win[i] = 4;
             }
-            printf("Carte : %s \t Couleur : %s \n", tableaux_graphique_carte[deck[i][j]],tableaux_graphique_couleur[deck_couleur[i][j]]);
+            printf("carte : %s \t couleur : %s \n", tableaux_graphique_carte[deck[i][j]],tableaux_graphique_couleur[deck_couleur[i][j]]);
             if(deck[i][j] == deck[i][0] || deck_couleur[i][j] == deck_couleur[i][0])
             {
                 compteur++;
-                if(compteur == fake_win[i])
+                if(compteur == 4+temp)
                 {
-                    printf("Felicitations, joueur %d, tu as gagne ! ", i);
+                    printf("félicitation tu as gagné joueur %d", i);
                     return 0;
                 }
             }
@@ -161,7 +170,7 @@ int menu() //Changement ecriture printf
     printf("<--------------------Menu-------------------->\n");
     printf("Appuyez sur [1] pour afficher votre main\n");
     printf("Appuyez sur [2] pour refaire un melange\n");
-    printf("Appuyez sur [3] pour lancer le jeu\n");
+    printf("Appuyez sur [3] pour lance le jeu\n");
     printf("Appuyez sur [4] pour afficher les regles \n");
     printf("Appuyez sur [5] pour quitter le jeu\n\n");
     printf("Que souhaitez-vous faire ? : ");
@@ -225,19 +234,19 @@ void echange(int deck[13][4],int deck_couleur[13][4],int joueur,int joueur_actu,
     }
 }
 
-void verification(int deck[13][4],int joueur_actu,int joueur)
+int verification(int deck[13][4],int joueur_actu,int joueur)
 {
     int i,j,valeur_joueur;
 
     valeur_joueur = 12-joueur;
 
-    for(i=12;i>valeur_joueur;i++)
+    for(i=12;i>valeur_joueur;i--)
     {
         for(j=0;j<4;j++)
         {
             if(deck[i][j] == 1)
             {
-                return 0;
+                return i;
             }
         }
     }
@@ -264,7 +273,7 @@ void game(int deck[13][4],int deck_couleur[13][4],int joueur,int joueur_actu,int
                 {
                 case 1:
                     system("cls");
-                    printf("joueur %d dit : 'Dame de coeur ! A vous l'honneur ! Dame de pique, a vous la suite !' \n\n\n",joueur_actu);
+                    printf("joueur %d dit : 'Dame de coeur ! A vous l'honneur ! Dame de pique, a vous la suite !' \n\n\n",verification(deck,joueur_actu,joueur));
                     manche++;
                     break;
                 }
@@ -351,8 +360,7 @@ int menu_game(int manche,int nombre_de_carte)
         printf("Appuyez sur [8] pour quitter la partie\n");
         printf("votre choix : ");
     }
-    scanf("%d", &choix);
-    fflush(stdin);
+    scanf("%d",&choix);
     return choix;
 }
 
