@@ -52,7 +52,7 @@ int main()
         n = scanf("%d",&nombre_de_manche);
         if(n != 1)
         {
-            puts("erreur");
+            puts("Erreur");
         }
         purge();
     }while(nombre_de_manche < 0 || nombre_de_manche > 999);
