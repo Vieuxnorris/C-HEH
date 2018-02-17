@@ -164,7 +164,7 @@ void affichage(int deck[13][4],int deck_couleur[13][4], int joueur,int joueur_ac
             {
                 fake_win[i] = 4;
             }
-            printf("carte : %s \t couleur : %s \n", tableaux_graphique_carte[deck[i][j]],tableaux_graphique_couleur[deck_couleur[i][j]]);
+            printf("Carte : %s \t Couleur : %s \n", tableaux_graphique_carte[deck[i][j]],tableaux_graphique_couleur[deck_couleur[i][j]]);
             if(deck[i][j] == deck[i][0])
             {
                 compteur++;
