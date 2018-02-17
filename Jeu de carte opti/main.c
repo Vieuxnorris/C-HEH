@@ -13,6 +13,14 @@ Credit dev: Alessio Baio
 *************************************************
 */
 
+static void purge(void)
+{
+    int c;
+    while((c = getchar()) != '\n' && c != EOF)
+    {
+    }
+}
+
 int main()
 {
     int joueur=0;
@@ -23,6 +31,7 @@ int main()
     int deck_couleur[13][4];
     int fake_win[13] = {4,4,4,4,4,4,4,4,4,4,4,4,4,4};
     int nombre_de_carte = 52;
+    int n;
 
     srand(time(NULL));
 
@@ -39,8 +48,13 @@ int main()
     do
     {
         printf("En combien de manches voulez-vous jouer ? ");
-        scanf("%d", &nombre_de_manche);
-        fflush(stdin);
+        fflush(stdout);
+        n = scanf("%d",&nombre_de_manche);
+        if(n != 1)
+        {
+            puts("erreur");
+        }
+        purge();
     }while(nombre_de_manche < 0 || nombre_de_manche > 999);
 
     melange(deck,deck_couleur,joueur);
